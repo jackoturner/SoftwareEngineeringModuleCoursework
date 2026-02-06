@@ -1,4 +1,4 @@
-# Software Engineerin Coursework - TapThat
+# Software Engineering Coursework - TapThat
 
 ## Project Description
 Our project, TapThat, is a community focused web application designed to support and promote local British pubs, which are declining in number across the UK. The platform allows users to view nearby pubs on an interactive map and find the quickest walking route to their nearest pub using an A star heuristic algorithm. Users can contribute by reviewing pints at pubs, view reviews left by others, and engage with the wider community through shared experiences rather than financial exchange. Each submitted review will include a built in AI feature that analyses the pour and generates a score, encouraging consistent quality and engagement. An aggregated leaderboard of the most popular beers helps pubs understand community preferences and encourages engagement between customers and local businesses. The application aligns with the theme of sharing and building community by raising awareness of local pubs and encouraging people to visit, support, and sustain them through collective participation.
