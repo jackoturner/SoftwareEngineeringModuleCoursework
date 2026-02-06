@@ -32,10 +32,10 @@ The project is developed using a Scrum based workflow. Tasks are managed using a
 The repository follows an Express project structure with separate folders for routes, views, and public assets. Docker configuration files are included to ensure a consistent development environment across the team.
 
 ## Team
-Jack Turner
-Luke Pring
-Alec Thompson
-Sujal Shah
+- Jack Turner
+- Luke Pring
+- Alec Thompson
+- Sujal Shah
 
 ## Status
 Sprint 1. Project setup and basic planning completed.
