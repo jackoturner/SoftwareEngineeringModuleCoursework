@@ -5,19 +5,19 @@ Our project, TapThat, is a community focused web application designed to support
 
 ## Tech Stack
 ### Frontend
-HTML
-CSS
-Javascript
-PUG
+- HTML
+- CSS
+- Javascript
+- PUG
 ### Backend
-Node.js
-Express.js
-MySQL
+- Node.js
+- Express.js
+- MySQL
 ### DevOps and Tooling
-Docker
-Git
-Github Actions
-Github Projects
+- Docker
+- Git
+- Github Actions
+- Github Projects
 
 ## Project Management
 The project is developed using a Scrum based workflow. Tasks are managed using a GitHub Project Kanban board, and development is completed iteratively across 4 sprints.
