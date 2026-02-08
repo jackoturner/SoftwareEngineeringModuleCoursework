@@ -50,5 +50,33 @@ Tasks are organized through a GitHub Project Kanban board, and development is ca
 1. Clone the repository  
 2. Ensure Docker is installed and operational  
 3. Execute the Docker compose command  
-4. Access the web application through a browser at the designated port:  
+4. Access the web application through a browser at the designated port:
+
+
+---
+
+## Repository Structure
+
+The repository adheres to an Express project architecture with distinct folders for:
+- Routes  
+- Views  
+- Public assets  
+
+Docker configuration files are provided to guarantee a uniform development environment for the team.
+
+---
+
+## Team
+
+- Jack Turner  
+- Luke Pring  
+- Alec Thompson  
+- Sujal Shah  
+
+---
+
+## Status
+
+- **Sprint 1:** Project setup and initial planning have been completed.
+
 
