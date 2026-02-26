@@ -52,7 +52,7 @@ DROP TABLE IF EXISTS `pub_beers`;
 CREATE TABLE `pub_beers` (
   `pub_id` int NOT NULL,
   `beer_id` int NOT NULL,
-  `is_available` tinyint(1) DEFAULT '1',
+  `is_available` tinyint(1) DEFAULT 1,
   PRIMARY KEY (`pub_id`,`beer_id`),
   KEY `beer_id` (`beer_id`),
   CONSTRAINT `pub_beers_ibfk_1` FOREIGN KEY (`pub_id`) REFERENCES `pubs` (`id`) ON DELETE CASCADE,
