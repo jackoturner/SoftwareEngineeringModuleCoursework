@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= pub.name
+  p Location: #{pub.location}
+
+  h2 Reviews
+  each review in reviews
+    div
+      p User: #{review.username}
+      p Beer: #{review.beer_name}
+      p Rating: #{review.rating}
+      p= review.review_text

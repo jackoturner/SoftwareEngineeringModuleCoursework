@@ -1,0 +1,6 @@
+extends layout
+
+block content
+    h1 Pubs
+    each pub in pubs
+        a(href=`/pubs/${pub.id}`)= pub.name

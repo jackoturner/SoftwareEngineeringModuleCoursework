@@ -1,8 +1,29 @@
-<!-- Page specific template rendered for the home route -->
-<!-- Extends the layout and inserts dynamic content into defined blocks -->
-
 extends layout
 
 block content
-  h1 Sprint 1 Setup Complete
-  p Express and PUG are working correctly.
+  header
+    h1 TapThat
+    p Find pubs. Rate pints. Discover the best pours.
+
+    nav
+      ul
+        li
+          a(href="/users") View Users
+        li
+          a(href="/pubs") View Pubs
+
+  main
+    section
+      h2 Quick Actions
+      ul
+        li
+          a(href="/pubs") Find a pub near you
+        li
+          a(href="/users") Browse users and reviews
+
+    section
+      h2 About
+      p TapThat helps you discover pubs, review pints, and see what others recommend. Use the map to find nearby pubs and check ratings before you go.
+
+  footer
+    p © 2026 TapThat
