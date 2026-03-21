@@ -2,5 +2,8 @@ extends layout
 
 block content
   h1 Users
+  ul
   each user in users
-    a(href=`/users/${user.id}`)= user.username
+    li
+      a(href=`/users/${user.id}`)= user.username
+    | (#{user.email || 'No email'})
