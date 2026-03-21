@@ -7,12 +7,12 @@ block content
 
   h2 Reviews  
   if reviews.length
-  ul
-  each review in reviews
-    li
-      p Pub: #{review.pub_name}
-      p Beer: #{review.beer_name}
-      p Rating: #{review.rating}
-      p= review.review_text
+    ul
+      each review in reviews
+        li
+          p Pub: #{review.pub_name}
+          p Beer: #{review.beer_name}
+          p Rating: #{review.rating}
+          p= review.review_text
   else
     p No reviews yet.
