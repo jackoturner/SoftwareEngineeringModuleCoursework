@@ -1,6 +1,9 @@
 extends ../layout/default
 
 block content
-    h1 Pubs
-    each pub in pubs
-        a(href=`/pubs/${pub.id}`)= pub.name
+    main.container
+        h1 Pubs
+        p Temporary page for testing purposes.
+        each pub in pubs
+            section
+                a(href=`/pubs/${pub.id}`)= pub.name

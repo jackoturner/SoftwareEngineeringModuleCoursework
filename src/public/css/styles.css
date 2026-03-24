@@ -66,7 +66,19 @@ section {
   background-color: white;
   padding: 15px;
   margin-bottom: 20px;
-  border-radius: 8px;
+  border-radius: 20px;
+  margin: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+section:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.container {
+  margin: 30px;
 }
 
 /* Lists */
