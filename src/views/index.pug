@@ -1,18 +1,11 @@
-extends layout
+extends ../layout/default
 
 block content
-  header
-    h1 TapThat
-    p Find pubs. Rate pints. Discover the best pours.
-
-    nav
-      ul
-        li
-          a(href="/users") View Users
-        li
-          a(href="/pubs") View Pubs
-
+  
   main
+    section.hero
+      h1 Ready for your next pint, username?
+      p Discover pubs, rate pints, and see what others recommend.
     section
       h2 Quick Actions
       ul
@@ -25,5 +18,3 @@ block content
       h2 About
       p TapThat helps you discover pubs, review pints, and see what others recommend. Use the map to find nearby pubs and check ratings before you go.
 
-  footer
-    p © 2026 TapThat
