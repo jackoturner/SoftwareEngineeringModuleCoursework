@@ -12,10 +12,24 @@ header {
   color: white;
   padding: 20px;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero {
+  background-color: #afafaf;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin: 0;
+  border-radius: 0;
 }
 
 header h1 {
   margin: 0;
+  text-decoration: none;
+  color: white;
 }
 
 header p {
@@ -45,11 +59,6 @@ nav a {
 
 nav a:hover {
   background-color: #ffa726;
-}
-
-/* Main layout */
-main {
-  padding: 20px;
 }
 
 /* Sections */
