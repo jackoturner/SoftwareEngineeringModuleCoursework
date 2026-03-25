@@ -78,5 +78,7 @@ Docker configuration files are provided to guarantee a uniform development envir
 ## Status
 
 - **Sprint 1:** Project setup and initial planning have been completed.
+- **Sprint 2:** Plans refined, Docker set up, code base started.
+- **Sprint 3:** Initial UI added, database working and basic functionality complete.
 
 
