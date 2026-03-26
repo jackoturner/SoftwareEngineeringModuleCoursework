@@ -71,7 +71,8 @@ Docker configuration files are provided to guarantee a uniform development envir
 - Jack Turner  
 - Luke Pring  
 - Alec Thompson  
-- Sujal Shah  
+- Sujal Shah
+- Victor Tepeniuc
 
 ---
 
