@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  main.container
+    h1 Users
+    p Browse all users.
+
+    section
+      ul
+        each user in users
+          li
+            a(href=`/users/${user.id}`)= user.first_name + ' ' + user.last_name
+            |  (#{user.email || 'No email'})

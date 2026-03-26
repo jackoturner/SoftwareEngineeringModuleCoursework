@@ -1,13 +1,20 @@
-# Multi-arch official Node image (supports both AMD64 and ARM64)
-FROM node:20-alpine
+# Base image to use
+FROM node:latest
 
-WORKDIR /app
+# set a working directory
+WORKDIR /src
 
-COPY package*.json ./
-RUN npm ci --only=production
+# Copy across project configuration information
+# Install application dependencies
+COPY package*.json /src/
 
-COPY src ./src
+# Ask npm to install the dependencies
+RUN npm install -g supervisor && npm install && npm install supervisor
 
+# Copy across all our files
+COPY . /src
+
+# Expose our application port (3000)
 EXPOSE 3000
 
-CMD ["node", "src/app.js"]
+

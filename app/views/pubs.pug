@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  main.container
+    h1 Pubs
+    p Browse all available pubs.
+
+    each pub in pubs
+      section
+        h2
+          a(href=`/pubs/${pub.id}`)= pub.name
+        p Address: #{pub.address}
+        p Postcode: #{pub.postcode}

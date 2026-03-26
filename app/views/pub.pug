@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  main.container
+    h1= pub.name
+    p Location: #{pub.address}
+
+    h2 Reviews
+    each review in reviews
+      section
+        p User: #{review.first_name} #{review.last_name}
+        p Beer: #{review.beer_name}
+        p Rating: #{review.rating}
+        if review.ai_pour_score
+          p AI Pour Score: #{review.ai_pour_score}
+        p= review.comment
