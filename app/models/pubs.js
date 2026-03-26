@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../config/db");
+const db = require("../services/db");
 
 // All pubs
 router.get("/", (req, res) => {
@@ -16,7 +16,7 @@ router.get("/:id", (req, res) => {
 
   const pubQuery = "SELECT * FROM pubs WHERE id = ?";
   const reviewsQuery = `
-    SELECT reviews.*, users.username, beers.name AS beer_name
+    SELECT reviews.*, users.first_name, users.last_name, beers.name AS beer_name
     FROM reviews
     JOIN users ON reviews.user_id = users.id
     JOIN beers ON reviews.beer_id = beers.id

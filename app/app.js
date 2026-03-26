@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const db = require("./config/db");
+const db = require("./services/db");
 
 const app = express();
 
@@ -9,12 +9,12 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 // Static files
-app.use(express.static(path.join(__dirname, "public")));
+app.use("/static", express.static(path.join(__dirname, "..", "static")));
 
 // Routes
-const usersRoutes = require("./routes/users");
-const pubsRoutes = require("./routes/pubs");
-const indexRouter = require("./routes/index");
+const usersRoutes = require("./models/users");
+const pubsRoutes = require("./models/pubs");
+const indexRouter = require("./models/index");
 
 // Order matters
 app.use("/users", usersRoutes);
