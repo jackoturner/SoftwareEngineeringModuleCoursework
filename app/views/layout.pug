@@ -1,14 +1,17 @@
 doctype html
 html
   head
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title= title
     link(rel="stylesheet", href="/static/styles.css")
   body
     header
       a(href="/")
         h1 TapThat
+      
+      button.mobile-menu-toggle(onclick="document.getElementById('main-nav').classList.toggle('active')", aria-label="Toggle Navigation") ☰
 
-      nav
+      nav#main-nav
         ul
           li
             a(href="/") Discover

@@ -114,3 +114,42 @@ footer {
   background-color: #eeeeee;
   color: #666;
 }
+
+/* Mobile Menu */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-wrap: wrap;
+  }
+  .mobile-menu-toggle {
+    display: block;
+  }
+  nav#main-nav {
+    display: none;
+    width: 100%;
+    margin-top: 15px;
+  }
+  nav#main-nav.active {
+    display: block;
+  }
+  nav#main-nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  nav#main-nav li {
+    margin: 0;
+  }
+  nav#main-nav a {
+    display: block;
+    text-align: center;
+  }
+}
