@@ -15,11 +15,13 @@ app.use("/static", express.static(path.join(__dirname, "..", "static")));
 const usersRoutes = require("./models/users");
 const pubsRoutes = require("./models/pubs");
 const indexRouter = require("./models/index");
+const pourscoreRoutes = require("./models/pourscore");
 
 // Order matters
 app.use("/users", usersRoutes);
 app.use("/pubs", pubsRoutes);
 app.use("/", indexRouter);
+app.use("/pourscore", pourscoreRoutes);
 
 // Database readiness check
 function testDBConnection(retries = 5) {
