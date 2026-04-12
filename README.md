@@ -50,7 +50,18 @@ Tasks are organized through a GitHub Project Kanban board, and development is ca
 1. Clone the repository  
 2. Ensure Docker is installed and operational  
 3. Execute the Docker compose command  
-4. Access the web application through a browser at the designated port:
+4. Access the web application through a browser at the designated port.
+
+### Environment Setup
+
+The PourScore AI feature requires a Google Gemini API key.
+
+1. Create a `.env` file in the root directory.
+2. Get a free API key from [aistudio.google.com](https://aistudio.google.com/).
+3. Add the key to your `.env` file:
+   ```env
+   GOOGLE_API_KEY=your_api_key_here
+   ```
 
 
 ### Troubleshooting

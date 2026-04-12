@@ -7,6 +7,11 @@ block content
             img(src="/static/images/pourscore-icon.png", alt="Beer", width="60", height="60")
             h1 PourScore
             p Take a photo of your pint, and have our AI rate it! 
+
+        if error
+            section.error-section
+                img(src="/static/images/sad-pint.png", alt="Sad Pint", width="60", height="60")
+                p.error #{error}
         section.upload-section#upload-section
             form.pourscore-form(action="/pourscore", method="post", enctype="multipart/form-data")
                 div.file-upload-wrapper
