@@ -53,6 +53,18 @@ Tasks are organized through a GitHub Project Kanban board, and development is ca
 4. Access the web application through a browser at the designated port:
 
 
+### Troubleshooting
+
+**Missing `multer` module crashing the server?**
+If you cloned the repository or updated the code, and your server is repeatedly crashing with `Error: Cannot find module 'multer'` (or similar), it's because Docker has cached an old version of the local `node_modules` volume.
+
+To fix this, you must destroy the old volume and rebuild your containers:
+```bash
+docker-compose down -v
+docker-compose up -d --build
+```
+*(The `-v` flag is critical—it deletes the old persistent volume so the new dependencies can properly install).*
+
 ---
 
 ## Repository Structure

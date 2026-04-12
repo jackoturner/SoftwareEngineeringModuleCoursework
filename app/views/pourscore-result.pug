@@ -9,5 +9,12 @@ block content
             p Take a photo of your pint, and have our AI rate it! 
         section.centre
             h2 Result
-            img.beer-image(src=results.image, alt="Beer")
+            div.side-by-side 
+                div
+                    img.beer-image(src=results.image, alt="Beer")
+                div
+                    h3 Score: #{results.score}
+                    p Head: #{results.head}
+                    p Colour: #{results.colour}
+                    p Clarity: #{results.clarity}
             

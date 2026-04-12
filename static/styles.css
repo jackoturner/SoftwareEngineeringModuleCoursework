@@ -300,9 +300,20 @@ footer {
   padding: 20px;
 }
 
-.beer-image {
-  max-width: 500px;
+.side-by-side {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.side-by-side img {
+  max-width: 100%;
   height: auto;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.side-by-side div {
+  width: 50%;
 }
