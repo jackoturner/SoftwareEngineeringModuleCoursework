@@ -121,3 +121,6 @@ dist
 .pnp.*
 
 .DS_Store
+
+# Ignore anything within the uploads folder
+static/uploads/

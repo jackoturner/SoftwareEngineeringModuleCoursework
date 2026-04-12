@@ -3,4 +3,30 @@ extends layout
 block content
 
     main 
-    
+        section.hero.beer-hero 
+            img(src="/static/images/pourscore-icon.png", alt="Beer", width="60", height="60")
+            h1 PourScore
+            p Take a photo of your pint, and have our AI rate it! 
+        section.upload-section#upload-section
+            form.pourscore-form(action="/pourscore", method="post", enctype="multipart/form-data")
+                div.file-upload-wrapper
+                    label.file-upload-label(for="image-upload")
+                        span.upload-text Choose a photo or snap a pint
+                    input#image-upload(type="file", name="image", accept="image/*", required, onchange="loading(this.form)")
+        section#loading(style="display: none;")
+            h2 Analyzing your pint...
+            div.spinner
+
+        section     
+            h2 How it works
+            p 1. Take a photo of your pint
+            p 2. Our AI will analyse it and give it a score based on the head, colour, and clarity of the beer
+            
+    script.
+        function loading(form) {
+            document.getElementById("upload-section").style.display = "none";
+            document.getElementById("loading").style.display = "block";
+            setTimeout(function() {
+                form.submit();
+            }, 100);
+        }

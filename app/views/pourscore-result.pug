@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+    main 
+        section.hero.beer-hero 
+            img(src="/static/images/pourscore-icon.png", alt="Beer", width="60", height="60")
+            h1 PourScore
+            p Take a photo of your pint, and have our AI rate it! 
+        section.centre
+            h2 Result
+            div.side-by-side 
+                div
+                    img.beer-image(src=results.image, alt="Beer")
+                div
+                    h3 Score: #{results.score}
+                    p #{results.comment}
+            
