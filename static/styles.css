@@ -124,7 +124,7 @@ a:hover {
 }
 
 /* Cards for items */
-div {
+.card {
   background-color: #fafafa;
   padding: 10px;
   margin-bottom: 10px;

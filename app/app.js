@@ -16,12 +16,16 @@ const usersRoutes = require("./models/users");
 const pubsRoutes = require("./models/pubs");
 const indexRouter = require("./models/index");
 const pourscoreRoutes = require("./models/pourscore");
+const mapRoutes = require("./models/map");
+const apiRoutes = require("./models/api");
 
 // Order matters
 app.use("/users", usersRoutes);
 app.use("/pubs", pubsRoutes);
 app.use("/", indexRouter);
 app.use("/pourscore", pourscoreRoutes);
+app.use("/map", mapRoutes);
+app.use("/api", apiRoutes);
 
 // Database readiness check
 function testDBConnection(retries = 5) {
