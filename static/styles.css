@@ -370,3 +370,44 @@ footer {
   color: #ae1d00;
   font-size: 1.1rem;
 }
+
+.map-wrapper {
+  position: relative;
+  height: 100vh;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+.map-btn {
+  position: absolute;
+  bottom: 20px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: none;
+  font-size: 48px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 1000;
+}
+
+.add-btn {
+  left: 20px;
+  background-color: #28a745;
+}
+
+.dir-btn {
+  right: 20px;
+  background-color: #dc3545;
+}
+
+.map-btn:hover {
+  transform: scale(1.1);
+}

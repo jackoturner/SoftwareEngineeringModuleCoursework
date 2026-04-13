@@ -2,7 +2,11 @@ extends layout
 
 block content
   main.container
-    #map(style="height: 100vh;")
+    .map-wrapper
+        #map
+
+        button#addReviewBtn.map-btn.add-btn ✚
+        button#directionsBtn.map-btn.dir-btn ➹
 
   link(rel="stylesheet", href="https://unpkg.com/leaflet/dist/leaflet.css")
   script(src="https://unpkg.com/leaflet/dist/leaflet.js")
