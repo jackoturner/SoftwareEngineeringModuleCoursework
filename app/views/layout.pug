@@ -19,6 +19,8 @@ html
           li
             a(href="/") Discover
           li
+            a(href="/map") Map
+          li
             a(href="/users") Users
           li
             a(href="/pubs") Pubs
@@ -34,3 +36,32 @@ html
     
     script(src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js")
     script(src="/static/bubbles.js")
+    script(src="/static/review.js")
+
+    // Review Modal
+    #reviewModal.modal
+      .modal-content
+        span.close-btn &times;
+
+        h2 Leave a Review
+
+        form#reviewForm
+          label(for="pubSelect") Select Pub
+          select#pubSelect(name="pub_id" required)
+            option(value="") -- Select Pub --
+
+          label(for="beerSelect") Select Beer
+          select#beerSelect(name="beer_id" disabled required)
+            option(value="") -- Select Beer --
+
+          label Rating
+          .star-rating
+            each val in [1,2,3,4,5]
+              span.star(data-value=val) ★
+
+          input(type="hidden" name="rating" id="ratingInput")
+
+          label Comment
+          textarea(name="comment" rows="4" required)
+
+          button(type="submit") Submit Review

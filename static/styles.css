@@ -124,7 +124,7 @@ a:hover {
 }
 
 /* Cards for items */
-div {
+.card {
   background-color: #fafafa;
   padding: 10px;
   margin-bottom: 10px;
@@ -369,4 +369,180 @@ footer {
 .error-section p {
   color: #ae1d00;
   font-size: 1.1rem;
+}
+
+.map-wrapper {
+  position: relative;
+  height: 100vh;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+.map-btn {
+  position: absolute;
+  bottom: 20px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: none;
+  font-size: 48px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 1000;
+}
+
+.add-btn {
+  left: 20px;
+  background-color: #28a745;
+}
+
+.dir-btn {
+  right: 20px;
+  background-color: #dc3545;
+}
+
+.map-btn:hover {
+  transform: scale(1.1);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+}
+
+.modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  width: 420px;
+  max-width: 90%;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  font-family: 'Inter', sans-serif;
+}
+
+.modal-content h2 {
+  margin: 0;
+  padding: 16px;
+  background: #ff9800;
+  color: #2c2c2c;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  right: 18px;
+  top: 14px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #f8f8f8;
+}
+
+textarea {
+  resize: none;
+}
+
+#reviewForm {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#reviewForm label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+}
+
+#reviewForm textarea,
+#reviewForm select {
+  box-sizing: border-box;
+}
+
+#reviewForm select,
+#reviewForm textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #f7f7f7;
+  font-size: 14px;
+  outline: none;
+}
+
+#reviewForm select:focus,
+#reviewForm textarea:focus {
+  border-color: #ff9800;
+  background: #fff;
+}
+
+#reviewForm select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.star-rating {
+  display: flex;
+  gap: 6px;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.star {
+  color: #ccc;
+  transition: color 0.2s;
+}
+
+.star.active {
+  color: #FFCC00;
+}
+
+#reviewForm button {
+  margin-top: 10px;
+  padding: 12px;
+  background: #ff9800;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#reviewForm button:hover {
+  background: #ff9800;
+}
+
+.modal-content {
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
