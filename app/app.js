@@ -43,6 +43,22 @@ function testDBConnection(retries = 5) {
   });
 }
 
+app.get("/api/pubs/:id/beers", (req, res) => {
+  const pubId = req.params.id;
+
+  const sql = `
+    SELECT beers.id, beers.name
+    FROM pub_beers
+    JOIN beers ON pub_beers.beer_id = beers.id
+    WHERE pub_beers.pub_id = ? AND pub_beers.is_available = 1
+  `;
+
+  db.query(sql, [pubId], (err, results) => {
+    if (err) return res.status(500).json(err);
+    res.json(results);
+  });
+});
+
 testDBConnection();
 
 // Server
