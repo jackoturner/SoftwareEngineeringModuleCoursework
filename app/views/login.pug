@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title Login
+    link(rel="stylesheet", href="/static/styles.css")
+  body
+    h1 Login
+
+    form(method="POST", action="/login")
+      div
+        label(for="email") Email
+        input(type="email", name="email", id="email", required)
+
+      div
+        label(for="password") Password
+        input(type="password", name="password", id="password", required)
+
+      button(type="submit") Login
