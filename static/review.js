@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("reviewModal");
-  const openBtn = document.getElementById("addReviewBtn"); // Make sure this button exists on pages where you want the modal
+  const openBtn = document.getElementById("addReviewBtn"); 
   const closeBtn = document.querySelector(".close-btn");
   const pubSelect = document.getElementById("pubSelect");
   const beerSelect = document.getElementById("beerSelect");

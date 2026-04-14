@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const heroes = document.querySelectorAll('section.beer-hero');
+    const heroes = document.querySelectorAll('section.beer-hero, .beer-hero');
     heroes.forEach((hero, index) => {
         const id = 'particles-hero-' + index;
         const div = document.createElement('div');

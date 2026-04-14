@@ -16,6 +16,12 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  res.locals.user_id = req.session.user_id;
+  res.locals.first_name = req.session.first_name;
+  next();
+});
+
 // View engine
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
@@ -79,7 +85,7 @@ app.get("/api/pubs/:id/beers", (req, res) => {
   });
 });
 
-// Handle review submission
+// Review submission
 app.post("/api/reviews", (req, res) => {
   const { pub_id, beer_id, rating, comment } = req.body;
   const user_id = req.session.user_id;

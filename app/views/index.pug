@@ -3,13 +3,8 @@ extends layout
 block content
   
   main
-    // Top bar (user + logout)
-    div(style="display:flex; justify-content:space-between; align-items:center;")
-      p Logged in as #{user_email}
-      a(href="/logout") Logout
-
     section.hero
-      h1 Ready for your next pint, #{user_email}?
+      h1 Ready for your next pint, #{first_name}?
       p Discover pubs, rate pints, and see what others recommend.
 
     section
