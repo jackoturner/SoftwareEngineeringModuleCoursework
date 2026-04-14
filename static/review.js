@@ -1,29 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   const modal = document.getElementById("reviewModal");
-  const openBtn = document.getElementById("addReviewBtn");
+  const openBtn = document.getElementById("addReviewBtn"); // Make sure this button exists on pages where you want the modal
   const closeBtn = document.querySelector(".close-btn");
-
   const pubSelect = document.getElementById("pubSelect");
   const beerSelect = document.getElementById("beerSelect");
-
   const stars = document.querySelectorAll(".star");
   const ratingInput = document.getElementById("ratingInput");
+  const reviewForm = document.getElementById("reviewForm");
 
-  if (!modal || !openBtn) {
-    console.log("Modal or button not found");
-    return;
-  }
+  if (!modal) return;
 
   // Open modal
-  openBtn.addEventListener("click", () => {
-    modal.classList.add("show");
-    loadPubs();
-  });
+  if (openBtn) {
+    openBtn.addEventListener("click", () => {
+      modal.classList.add("show");
+      loadPubs();
+    });
+  }
 
   // Close modal
   closeBtn.onclick = () => modal.classList.remove("show");
-
   window.onclick = e => {
     if (e.target === modal) modal.classList.remove("show");
   };
@@ -41,16 +37,17 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch(err => console.error("Error loading pubs:", err));
   }
 
-  // Load beers when pub selected
+  // Load beers when pub is selected
   pubSelect.addEventListener("change", () => {
     const pubId = pubSelect.value;
-
     beerSelect.disabled = true;
+    beerSelect.innerHTML = `<option value="">-- Select Beer --</option>`;
+
+    if (!pubId) return;
 
     fetch(`/api/pubs/${pubId}/beers`)
       .then(res => res.json())
       .then(data => {
-        beerSelect.innerHTML = `<option value="">-- Select Beer --</option>`;
         data.forEach(beer => {
           beerSelect.innerHTML += `<option value="${beer.id}">${beer.name}</option>`;
         });
@@ -64,28 +61,59 @@ document.addEventListener("DOMContentLoaded", () => {
     star.addEventListener("click", () => {
       const value = index + 1;
       ratingInput.value = value;
-
       stars.forEach((s, i) => {
-        if (i < value) {
-          s.classList.add("active");
-        } else {
-          s.classList.remove("active");
-        }
+        s.classList.toggle("active", i < value);
       });
     });
 
     star.addEventListener("mouseover", () => {
       stars.forEach((s, i) => {
-        s.style.color = i <= index ? "gold" : "lightgray";
+        s.style.color = (i <= index) ? "gold" : "lightgray";
       });
     });
 
     star.addEventListener("mouseout", () => {
-      const current = ratingInput.value;
+      const current = parseInt(ratingInput.value) || 0;
       stars.forEach((s, i) => {
-        s.style.color = i < current ? "gold" : "lightgray";
+        s.style.color = (i < current) ? "gold" : "lightgray";
       });
     });
   });
 
+  // Form submission
+  reviewForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(reviewForm);
+    const data = Object.fromEntries(formData.entries());
+
+    if (!data.rating) {
+      alert("Please select a rating");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/reviews", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert("Thank you! Your review has been submitted.");
+        reviewForm.reset();
+        stars.forEach(s => s.classList.remove("active"));
+        modal.classList.remove("show");
+        
+        setTimeout(() => location.reload(), 800);
+      } else {
+        alert(result.error || "Failed to submit review");
+      }
+    } catch (err) {
+      console.error("Submit error:", err);
+      alert("Something went wrong. Please try again.");
+    }
+  });
 });
