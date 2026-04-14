@@ -3,9 +3,15 @@ extends layout
 block content
   
   main
+    // Top bar (user + logout)
+    div(style="display:flex; justify-content:space-between; align-items:center;")
+      p Logged in as #{user_email}
+      a(href="/logout") Logout
+
     section.hero
-      h1 Ready for your next pint, username?
+      h1 Ready for your next pint, #{user_email}?
       p Discover pubs, rate pints, and see what others recommend.
+
     section
       h2 Quick Actions
       ul
@@ -17,4 +23,3 @@ block content
     section
       h2 About
       p TapThat helps you discover pubs, review pints, and see what others recommend. Use the map to find nearby pubs and check ratings before you go.
-

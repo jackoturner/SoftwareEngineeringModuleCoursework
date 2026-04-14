@@ -74,16 +74,16 @@ CREATE TABLE reviews (
 
 -- USERS DATA
 INSERT INTO users VALUES
-(1,'Sujal','Shah','sujal@example.com','hash1','2005-04-12',NULL,NULL,NOW()),
-(2,'Luke','Pring','luke@example.com','hash2','2003-09-21',NULL,NULL,NOW()),
-(3,'Jack','Turner','jack@example.com','hash3','2001-06-10',NULL,NULL,NOW()),
-(4,'Victor','Tepeniuc','victor@example.com','hash4','1999-06-11',NULL,NULL,NOW()),
-(5,'Alec','Thompson','alec@example.com','hash5','2002-07-01',NULL,NULL,NOW()),
-(6,'Emily','Clark','emily@example.com','hash6','2000-03-15',NULL,NULL,NOW()),
-(7,'Tom','Harris','tom@example.com','hash7','1998-11-02',NULL,NULL,NOW()),
-(8,'Sarah','Jones','sarah@example.com','hash8','2004-01-25',NULL,NULL,NOW()),
-(9,'Chris','Evans','chris@example.com','hash9','1997-08-19',NULL,NULL,NOW()),
-(10,'Matt','Green','matt@example.com','hash10','2001-12-05',NULL,NULL,NOW());
+(1,'Sujal','Shah','sujal@example.com','sujal123','2005-04-12',NULL,NULL,NOW()),
+(2,'Luke','Pring','luke@example.com','luke123','2003-09-21',NULL,NULL,NOW()),
+(3,'Jack','Turner','jack@example.com','jack123','2001-06-10',NULL,NULL,NOW()),
+(4,'Victor','Tepeniuc','victor@example.com','victor123','1999-06-11',NULL,NULL,NOW()),
+(5,'Alec','Thompson','alec@example.com','alec123','2002-07-01',NULL,NULL,NOW()),
+(6,'Emily','Clark','emily@example.com','emily123','2000-03-15',NULL,NULL,NOW()),
+(7,'Tom','Harris','tom@example.com','tom123','1998-11-02',NULL,NULL,NOW()),
+(8,'Sarah','Jones','sarah@example.com','sarah123','2004-01-25',NULL,NULL,NOW()),
+(9,'Chris','Evans','chris@example.com','chris123','1997-08-19',NULL,NULL,NOW()),
+(10,'Matt','Green','matt@example.com','matt123','2001-12-05',NULL,NULL,NOW());
 
 -- PUBS DATA
 INSERT INTO pubs VALUES

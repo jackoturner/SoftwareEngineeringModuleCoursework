@@ -1,11 +1,20 @@
 const express = require("express");
 const path = require("path");
 const db = require("./services/db");
+const session = require("express-session");
 
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(
+  session({
+    secret: "my-secret-key",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 // View engine
 app.set("view engine", "pug");
@@ -22,16 +31,24 @@ const pourscoreRoutes = require("./models/pourscore");
 const mapRoutes = require("./models/map");
 const apiRoutes = require("./models/api");
 
+// Middleware to require login
+function requireLogin(req, res, next) {
+  if (!req.session.user_id) {
+    return res.redirect("/login");
+  }
+  next();
+}
+
 // Order matters
-app.use("/users", usersRoutes);
-app.use("/pubs", pubsRoutes);
 app.use("/", indexRouter);
-app.use("/pourscore", pourscoreRoutes);
-app.use("/map", mapRoutes);
-app.use("/api", apiRoutes);
+app.use("/users", requireLogin, usersRoutes);
+app.use("/pubs", requireLogin, pubsRoutes);
+app.use("/pourscore", requireLogin, pourscoreRoutes);
+app.use("/map", requireLogin, mapRoutes);
+app.use("/api", requireLogin, apiRoutes);
 
 // Database readiness check
-function testDBConnection(retries = 5) {
+function testDBConnection(retries = 10) {
   db.query("SELECT 1", (err) => {
     if (err) {
       console.log("Waiting for DB...");
@@ -65,7 +82,11 @@ app.get("/api/pubs/:id/beers", (req, res) => {
 // Handle review submission
 app.post("/api/reviews", (req, res) => {
   const { pub_id, beer_id, rating, comment } = req.body;
-  const user_id = 1; // NEED TO CHANGE WITH LOGIN PAGE
+  const user_id = req.session.user_id;
+
+  if (!user_id) {
+    return res.status(401).json({ error: "You must be logged in" });
+  }
 
   if (!pub_id || !beer_id || !rating || !comment) {
     return res.status(400).json({ error: "Missing required fields" });
@@ -84,10 +105,10 @@ app.post("/api/reviews", (req, res) => {
       return res.status(500).json({ error: "Failed to save review" });
     }
 
-    res.json({ 
-      success: true, 
+    res.json({
+      success: true,
       message: "Review submitted successfully!",
-      review_id: result.insertId 
+      review_id: result.insertId
     });
   });
 });
