@@ -1,0 +1,57 @@
+doctype html
+html.login-html
+  head
+    title Login
+    link(rel="stylesheet", href="/static/styles.css")
+    script(src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js")
+    script(src="/static/bubbles.js")
+
+  body.login-page
+    #error-popup.error-popup(style="display: none;")
+      span#error-message
+    .beer-hero
+      .login-container
+        h1.login-title Login
+        form#loginForm.login-form
+          .form-group
+            label.form-label(for="email") Email
+            input.form-input(type="email", name="email", id="email", required)
+          
+          .form-group
+            label.form-label(for="password") Password
+            input.form-input(type="password", name="password", id="password", required)
+          
+          button.login-button(type="submit") Login
+
+    script.
+      document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const popup = document.getElementById('error-popup');
+        const msgSpan = document.getElementById('error-message');
+
+        try {
+          const response = await fetch('/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+          });
+
+          const data = await response.json();
+
+          if (data.success) {
+            window.location.href = data.redirect; // Redirect on success
+          } else {
+            // Show the popup with the error message
+            msgSpan.innerText = data.message;
+            popup.style.display = 'block';
+            
+            setTimeout(() => { popup.style.display = 'none'; }, 4000);
+          }
+        } catch (err) {
+          msgSpan.innerText = "Connection lost. Try again.";
+          popup.style.display = 'block';
+        }
+      });

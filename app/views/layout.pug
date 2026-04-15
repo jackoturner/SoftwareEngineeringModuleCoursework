@@ -7,6 +7,7 @@ html
     link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
     link(href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap", rel="stylesheet")
     link(href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap", rel="stylesheet")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css")
     link(rel="stylesheet", href="/static/styles.css")
   body
     header
@@ -20,11 +21,19 @@ html
           li
             a(href="/") Discover
           li
+            a(href="/map") Map
+          li
             a(href="/users") Users
           li
             a(href="/pourscore", title="PourScore")
               span PourScore
               span.beta-badge Beta
+          li.profile-wrapper
+            button#profileBtn.profile-btn
+              i.fa-solid.fa-user
+            .profile-dropdown#profileDropdown
+              a(href=`/users/${user_id}`) Your Profile
+              a.logout-link(href="/logout") Logout
 
     block content
 
@@ -33,3 +42,33 @@ html
     
     script(src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js")
     script(src="/static/bubbles.js")
+    script(src="/static/review.js")
+    script(src="/static/profile.js")
+
+    // Review Modal
+    #reviewModal.modal
+      .modal-content
+        span.close-btn &times;
+
+        h2 Leave a Review
+
+        form#reviewForm
+          label(for="pubSelect") Select Pub
+          select#pubSelect(name="pub_id" required)
+            option(value="") -- Select Pub --
+
+          label(for="beerSelect") Select Beer
+          select#beerSelect(name="beer_id" disabled required)
+            option(value="") -- Select Beer --
+
+          label Rating
+          .star-rating
+            each val in [1,2,3,4,5]
+              span.star(data-value=val) ★
+
+          input(type="hidden" name="rating" id="ratingInput")
+
+          label Comment
+          textarea(name="comment" rows="4" required)
+
+          button(type="submit") Submit Review
