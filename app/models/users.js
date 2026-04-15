@@ -2,23 +2,31 @@ const express = require("express");
 const router = express.Router();
 const db = require("../services/db");
 
-// GET /users
+// users.js – updated GET / route
 router.get("/", (req, res) => {
-  const sql = `
-   SELECT u.id, u.first_name, u.last_name, u.email, u.created_at, 
+  const search = req.query.search || "";
+  let sql = `
+    SELECT u.id, u.first_name, u.last_name, u.email, u.created_at, 
       COALESCE(AVG(r.rating), 0) AS average_rating
-   FROM users u
-   LEFT JOIN reviews r ON u.id = r.user_id
-   GROUP BY u.id
-   ORDER BY u.id
+    FROM users u
+    LEFT JOIN reviews r ON u.id = r.user_id
   `;
-  db.query(sql, (err, results) => {
+  const params = [];
+
+  if (search.trim() !== "") {
+    sql += ` WHERE u.first_name LIKE ? OR u.last_name LIKE ? OR u.email LIKE ?`;
+    const like = `%${search}%`;
+    params.push(like, like, like);
+  }
+
+  sql += ` GROUP BY u.id ORDER BY u.id`;
+
+  db.query(sql, params, (err, results) => {
     if (err) {
       console.error(err);
       return res.status(500).send("Database error");
     }
-
-    res.render("users", { users: results });
+    res.render("users", { users: results, search: search });
   });
 });
 

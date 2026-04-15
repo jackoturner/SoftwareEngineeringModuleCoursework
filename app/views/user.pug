@@ -1,20 +1,38 @@
 extends layout
 
 block content
-  main.container
-    h1= user.first_name + ' ' + user.last_name
-    p Email: #{user.email || 'No email'}
-    p Joined: #{user.created_at ? new Date(user.created_at).toLocaleDateString() : 'Unknown'}
+  .container
+    .profile-card
+      .profile-avatar
+        .avatar-large #{user.first_name.charAt(0)}#{user.last_name.charAt(0)}
+      .profile-details
+        h1 #{user.first_name} #{user.last_name}
+        p.email #{user.email}
+        - var joinDate = user.created_at ? new Date(user.created_at).toDateString() : 'Unknown'
+        p.joined Joined: #{joinDate}
+        p.stats Total reviews: #{reviews.length}
 
-    h2 Reviews by #{user.first_name} 
-    if reviews && reviews.length
+    h2.reviews-title Reviews by #{user.first_name}
+    .reviews-grid
       each review in reviews
-        div.review-card
-          p Pub: #{review.pub_name}
-          p Beer: #{review.beer_name}
-          p Rating: #{review.rating}
+        .review-card
+          .review-header
+            span.pub-name 📍 #{review.pub_name}
+            span.beer-name 🍺 #{review.beer_name}
+          .review-rating
+            - var rating = parseInt(review.rating) || 0
+            - for (var i = 1; i <= 5; i++)
+              if i <= rating
+                span.star-filled ★
+              else
+                span.star-empty ☆
+            span.rating-value (#{rating}/5)
           if review.ai_pour_score
-            p AI Pour Score: #{review.ai_pour_score}
-          p= review.comment
-    else
-      p No reviews yet.
+            - var aiScore = parseFloat(review.ai_pour_score) || 0
+            .ai-score AI Pour Score: #{aiScore.toFixed(1)}/5
+          .review-comment "#{review.comment}"
+          - var reviewDate = review.created_at ? new Date(review.created_at).toLocaleDateString() : 'Unknown'
+          .review-date #{reviewDate}
+
+      if reviews.length === 0
+        p.no-reviews No reviews yet.

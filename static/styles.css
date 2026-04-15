@@ -771,3 +771,227 @@ body.login-page {
     transform: translateY(0);
   }
 }
+/* ========== SEARCH BAR (Google style, centered) ========== */
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0 40px;
+}
+
+.search-form {
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 20px 14px 50px;
+  font-size: 16px;
+  border: 1px solid #dfe1e5;
+  border-radius: 48px;
+  outline: none;
+  background-color: white;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: #ff9800;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+}
+
+.search-button {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #777;
+}
+
+/* ========== USERS GRID (cards) ========== */
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  padding: 0 20px;
+}
+
+.user-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.user-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+}
+
+.avatar-placeholder {
+  width: 80px;
+  height: 80px;
+  background: #ff9800;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+.user-info h3 {
+  margin: 10px 0 5px;
+  font-size: 1.4rem;
+}
+
+.user-email {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.user-joined, .user-rating {
+  font-size: 0.85rem;
+  color: #555;
+  margin: 6px 0;
+}
+
+.view-profile-btn {
+  display: inline-block;
+  background-color: #ff9800;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 12px;
+  transition: background 0.2s;
+}
+
+.view-profile-btn:hover {
+  background-color: #e68900;
+}
+
+/* ========== USER PROFILE CARD ========== */
+.profile-card {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  margin: 20px 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.avatar-large {
+  width: 120px;
+  height: 120px;
+  background: #ff9800;
+  color: white;
+  font-size: 48px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.profile-details h1 {
+  margin: 0 0 8px;
+}
+
+.profile-details p {
+  margin: 6px 0;
+  color: #555;
+}
+
+.reviews-title {
+  margin: 30px 20px 20px;
+  font-size: 1.8rem;
+}
+
+/* ========== REVIEW CARDS (squaricles) ========== */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+  padding: 0 20px;
+}
+
+.review-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: 0.2s;
+}
+
+.review-card:hover {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-weight: bold;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.pub-name, .beer-name {
+  font-size: 1rem;
+}
+
+.star-filled {
+  color: #ffcc00;
+}
+
+.star-empty {
+  color: #ddd;
+}
+
+.rating-value {
+  margin-left: 8px;
+  font-weight: normal;
+}
+
+.ai-score {
+  background: #f0f0f0;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  margin: 10px 0;
+}
+
+.review-comment {
+  font-style: italic;
+  margin: 12px 0;
+  color: #333;
+}
+
+.review-date {
+  font-size: 0.75rem;
+  color: #999;
+  text-align: right;
+}
+
+.no-results, .no-reviews {
+  text-align: center;
+  padding: 40px;
+  color: #777;
+}
