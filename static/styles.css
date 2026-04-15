@@ -589,6 +589,21 @@ section.remove-styling:hover {
   background-color: transparent !important;
   padding: 0;
   margin: 0;
+}
+
+.beer-item {
+  background-color: #ffffff; 
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
+  padding: 12px 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.beer-item:hover {
+  background-color: #eeeeee;
+  border-color: #d0d0d0;
+}
+
 .map-wrapper {
   position: relative;
   height: 100vh;
@@ -658,7 +673,7 @@ section.remove-styling:hover {
 .modal-content h2 {
   margin: 0;
   padding: 16px;
-  background: #ff9800;
+  background: #B87333;
   color: #2c2c2c;
   font-size: 18px;
   font-weight: 700;
@@ -710,7 +725,7 @@ textarea {
 
 #reviewForm select:focus,
 #reviewForm textarea:focus {
-  border-color: #ff9800;
+  border-color: #B87333;
   background: #fff;
 }
 
@@ -738,7 +753,7 @@ textarea {
 #reviewForm button {
   margin-top: 10px;
   padding: 12px;
-  background: #ff9800;
+  background: #B87333;
   border: none;
   border-radius: 8px;
   font-weight: 700;
@@ -831,7 +846,7 @@ body.login-page {
 }
 
 .form-input {
-  width: 60vh;
+  width: 50vh;
   padding: 15px 5px 15px 5px;
   border: none;
   border-radius: 10px;
@@ -961,7 +976,7 @@ body.login-page {
 
 .profile-dropdown a:hover {
   background: #fff8e1;
-  color: #ff9800;
+  color: #B87333;
 }
 
 .profile-dropdown a.logout-link {
@@ -1014,7 +1029,7 @@ body.login-page {
 }
 
 .search-input:focus {
-  border-color: #ff9800;
+  border-color: #B87333;
   box-shadow: 0 1px 6px rgba(0,0,0,0.1);
 }
 
@@ -1058,7 +1073,7 @@ body.login-page {
 .avatar-placeholder {
   width: 80px;
   height: 80px;
-  background: #ff9800;
+  background: #3399b8;
   color: white;
   font-size: 32px;
   font-weight: bold;
@@ -1087,14 +1102,14 @@ body.login-page {
 
 .view-profile-btn {
   display: inline-block;
-  background-color: #ff9800;
+  background-color: #B87333;
   color: white;
   padding: 10px 20px;
   border-radius: 40px;
   text-decoration: none;
   font-weight: bold;
   margin-top: 12px;
-  transition: background 0.2s;
+  transition: 0.2s;
 }
 
 .view-profile-btn:hover {
@@ -1117,7 +1132,7 @@ body.login-page {
 .avatar-large {
   width: 120px;
   height: 120px;
-  background: #ff9800;
+  background: #3399b8;
   color: white;
   font-size: 48px;
   font-weight: bold;

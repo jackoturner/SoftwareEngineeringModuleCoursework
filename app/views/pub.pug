@@ -26,6 +26,6 @@ block content
         h2(style="margin-top: 0;") What's on tap?
         .section-row
           each beer in beers
-            div
+            div.beer-item
               strong #{beer.name}
               p(style="margin: 0; font-size: 0.8em;") #{beer.type} • #{beer.abv}% ABV
