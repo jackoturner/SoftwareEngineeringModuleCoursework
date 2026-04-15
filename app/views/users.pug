@@ -1,13 +1,62 @@
 extends layout
 
 block content
-  main.container
-    h1 Users
-    p Browse all users.
+  .container
+    .search-container
+      form.search-form(method="GET" action="/users")
+        input.search-input(type="text" name="search" placeholder="Search by name or email" value=search autocomplete="off")
+        button.search-button(type="submit") 🔍
 
-    section
-      ul
-        each user in users
-          li
-            a(href=`/users/${user.id}`)= user.first_name + ' ' + user.last_name
-            |  (#{user.email || 'No email'})
+    .users-grid
+      each user in users
+        .user-card
+          .user-avatar
+            .avatar-placeholder #{user.first_name.charAt(0)}#{user.last_name.charAt(0)}
+          .user-info
+            h3.user-name #{user.first_name} #{user.last_name}
+            p.user-email #{user.email}
+            - var joinDate = user.created_at ? new Date(user.created_at).toDateString() : 'Unknown'
+            p.user-joined Joined: #{joinDate}
+            - var avgRating = parseFloat(user.average_rating) || 0
+            p.user-rating Avg rating: #{avgRating.toFixed(1)} ★
+          .user-action
+            a.view-profile-btn(href=`/users/${user.id}`) View Profile
+
+      if users.length === 0
+        p.no-results No users found.
+
+  script.
+    const searchInput = document.getElementById('userSearch');
+    const clearBtn = document.getElementById('clearSearch');
+    const cards = document.querySelectorAll('.user-card');
+
+    function filterUsers() {
+      const term = searchInput.value.toLowerCase().trim();
+      cards.forEach(card => {
+        const name = card.getAttribute('data-name');
+        const email = card.getAttribute('data-email');
+        const id = card.getAttribute('data-id');
+        const rating = parseFloat(card.getAttribute('data-rating')) || 0;
+
+        let matchesText = name.includes(term) || email.includes(term) || id.includes(term);
+        let matchesRating = false;
+        if (!isNaN(parseFloat(term)) && isFinite(term)) {
+          const ratingValue = parseFloat(term);
+          matchesRating = rating >= ratingValue;
+        }
+
+        if (matchesText || matchesRating) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    searchInput.addEventListener('input', filterUsers);
+
+    clearBtn.addEventListener('click', function() {
+      searchInput.value = '';
+      filterUsers();
+      searchInput.focus();
+    });
