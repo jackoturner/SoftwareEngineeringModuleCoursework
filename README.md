@@ -63,11 +63,6 @@ The PourScore AI feature requires a Google Gemini API key.
    GOOGLE_API_KEY=your_api_key_here
    ```
 
-The Map feature requires leaflet from OpenStreetMaps to be installed.
-```
-npm install leaflet   
-```
-
 ### Troubleshooting
 
 **Missing `multer` module crashing the server?**
