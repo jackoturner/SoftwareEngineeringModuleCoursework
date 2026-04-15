@@ -1,31 +1,16 @@
 extends layout
 
 block content
-  section.hero.pub-hero
-    h1= pub.name
-    p(style="margin-bottom: 30px;")
-      img(src="/static/images/pin.png", alt="Location", width="24", height="24", style="vertical-align: middle; margin-right: 10px;") 
-      | #{pub.address}
-    a(href="/map").btn Get Directions
   main.container
-    
-    .section-row
-      section.w-two-thirds.remove-styling
-        h2(style="margin-top: 0;") Reviews
-        .section-row
-          each review in reviews
-              section.w-third
-                each i in Array(review.rating || 0).fill()
-                  img(src="/static/images/star.png", alt="Star", width="24", height="24", style="vertical-align: middle; margin-right: 10px;") 
-                p User: #{review.first_name} #{review.last_name}
-                p Beer: #{review.beer_name}
-                if review.ai_pour_score 
-                  p AI Pour Score: #{review.ai_pour_score}
-                p= review.comment
-      section.w-third.remove-styling(style="padding-left: 30px;")
-        h2(style="margin-top: 0;") What's on tap?
-        .section-row
-          each beer in beers
-            div
-              strong #{beer.name}
-              p(style="margin: 0; font-size: 0.8em;") #{beer.type} • #{beer.abv}% ABV
+    h1= pub.name
+    p Location: #{pub.address}
+
+    h2 Reviews
+    each review in reviews
+      section
+        p User: #{review.first_name} #{review.last_name}
+        p Beer: #{review.beer_name}
+        p Rating: #{review.rating}
+        if review.ai_pour_score
+          p AI Pour Score: #{review.ai_pour_score}
+        p= review.comment

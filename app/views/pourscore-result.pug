@@ -6,17 +6,13 @@ block content
         section.hero.beer-hero 
             img(src="/static/images/pourscore-icon.png", alt="Beer", width="60", height="60")
             h1 PourScore
-            p(style="margin-bottom: 40px") Take a photo of your pint, and have our AI rate it! 
-            .section-row
-                section.w-half
-                    h2 Your Pint
+            p Take a photo of your pint, and have our AI rate it! 
+        section.centre
+            h2 Result
+            div.side-by-side 
+                div
                     img.beer-image(src=results.image, alt="Beer")
-                section.w-half
-                    h2 Analysis Result
-                    div.score-container
-                        span.score-label Score
-                        h3.score-value #{results.score}
-                        span.score-max / 5
-                    div
-                        p #{results.comment}
+                div
+                    h3 Score: #{results.score}
+                    p #{results.comment}
             
