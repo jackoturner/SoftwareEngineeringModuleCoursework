@@ -6,10 +6,10 @@ block content
     p Email: #{user.email || 'No email'}
     p Joined: #{user.created_at ? new Date(user.created_at).toLocaleDateString() : 'Unknown'}
 
-    h2 Reviews  
-    if reviews.length
+    h2 Reviews by #{user.first_name} 
+    if reviews && reviews.length
       each review in reviews
-        section
+        div.review-card
           p Pub: #{review.pub_name}
           p Beer: #{review.beer_name}
           p Rating: #{review.rating}

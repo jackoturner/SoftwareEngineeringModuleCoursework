@@ -1,13 +1,63 @@
 extends layout
 
 block content
-  main.container
-    h1 Users
-    p Browse all users.
+  h1 All Users
 
-    section
-      ul
-        each user in users
-          li
-            a(href=`/users/${user.id}`)= user.first_name + ' ' + user.last_name
-            |  (#{user.email || 'No email'})
+  .search-bar
+    .search-wrapper
+      input(type="text" id="userSearch" placeholder="Search by name, email, ID or rating")
+      button#clearSearch(type="button") X
+
+  p Browse all users.
+
+  .users-grid
+    each user in users
+      .user-card(
+        data-name="#{user.first_name} #{user.last_name}".toLowerCase()
+        data-email="#{user.email}".toLowerCase()
+        data-id="#{user.id}"
+        data-rating="#{user.avg_rating}"
+      )
+        h3= user.first_name + ' ' + user.last_name
+        p= user.email
+        if user.avg_rating > 0
+          p Average Rating: #{user.avg_rating.toFixed(1)}
+        else
+          p No reviews yet
+        a.button(href=`/users/${user.id}`) View Profile
+
+  script.
+    const searchInput = document.getElementById('userSearch');
+    const clearBtn = document.getElementById('clearSearch');
+    const cards = document.querySelectorAll('.user-card');
+
+    function filterUsers() {
+      const term = searchInput.value.toLowerCase().trim();
+      cards.forEach(card => {
+        const name = card.getAttribute('data-name');
+        const email = card.getAttribute('data-email');
+        const id = card.getAttribute('data-id');
+        const rating = parseFloat(card.getAttribute('data-rating')) || 0;
+
+        let matchesText = name.includes(term) || email.includes(term) || id.includes(term);
+        let matchesRating = false;
+        if (!isNaN(parseFloat(term)) && isFinite(term)) {
+          const ratingValue = parseFloat(term);
+          matchesRating = rating >= ratingValue;
+        }
+
+        if (matchesText || matchesRating) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    searchInput.addEventListener('input', filterUsers);
+
+    clearBtn.addEventListener('click', function() {
+      searchInput.value = '';
+      filterUsers();
+      searchInput.focus();
+    });

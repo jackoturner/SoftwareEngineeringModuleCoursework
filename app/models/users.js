@@ -4,7 +4,15 @@ const db = require("../services/db");
 
 // GET /users
 router.get("/", (req, res) => {
-  db.query("SELECT * FROM users", (err, results) => {
+  const sql = `
+   SELECT u.id, u.first_name, u.last_name, u.email, u.created_at, 
+      COALESCE(AVG(r.rating), 0) AS average_rating
+   FROM users u
+   LEFT JOIN reviews r ON u.id = r.user_id
+   GROUP BY u.id
+   ORDER BY u.id
+  `;
+  db.query(sql, (err, results) => {
     if (err) {
       console.error(err);
       return res.status(500).send("Database error");
