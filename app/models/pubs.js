@@ -33,9 +33,24 @@ router.get("/:id", (req, res) => {
     db.query(reviewsQuery, [pubId], (err, reviewResults) => {
       if (err) return res.status(500).send("Database error");
 
-      res.render("pub", {
-        pub: pubResults[0],
-        reviews: reviewResults
+      const beersQuery = `
+        SELECT b.id, b.name, b.brewery, b.type, b.abv, 
+               COALESCE(AVG(r.rating), 0) as rating
+        FROM beers b
+        JOIN pub_beers pb ON b.id = pb.beer_id
+        LEFT JOIN reviews r ON (b.id = r.beer_id AND pb.pub_id = r.pub_id)
+        WHERE pb.pub_id = ?
+        GROUP BY b.id
+      `;
+
+      db.query(beersQuery, [pubId], (err, beerResults) => {
+        if (err) return res.status(500).send("Database error");
+
+        res.render("pub", {
+          pub: pubResults[0],
+          reviews: reviewResults,
+          beers: beerResults
+        });
       });
     });
   });
