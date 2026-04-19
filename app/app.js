@@ -40,7 +40,10 @@ const apiRoutes = require("./models/api");
 // Middleware to require login
 function requireLogin(req, res, next) {
   if (!req.session.user_id) {
-    return res.redirect("/login");
+    if (req.xhr || (req.headers.accept && req.headers.accept.indexOf('json') > -1)) {
+        return res.status(401).json({ error: "You must be logged in" });
+    }
+    return res.redirect(`/?login=true&continue=${encodeURIComponent(req.originalUrl)}`);
   }
   next();
 }

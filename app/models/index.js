@@ -4,18 +4,15 @@ const db = require("../services/db");
 const bcrypt = require("bcrypt");
 
 router.get("/", (req, res) => {
-  if (!req.session.user_id) {
-    return res.redirect("/login");
-  }
-
   res.render("index", {
     user_email: req.session.user_email,
     first_name: req.session.first_name
   });
 });
 
+
 router.get("/login", (req, res) => {
-  res.render("login");
+  res.redirect("/?login=true");
 });
 
 router.post("/login", (req, res) => {
@@ -74,7 +71,7 @@ router.get("/logout", (req, res) => {
     if (err) {
       console.error("Logout error:", err);
     }
-    res.redirect("/login");
+    res.redirect("/");
   });
 });
 

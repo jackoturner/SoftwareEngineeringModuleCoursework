@@ -29,11 +29,15 @@ html
               span PourScore
               span.beta-badge Beta
           li.profile-wrapper
-            button#profileBtn.profile-btn
-              i.fa-solid.fa-user
-            .profile-dropdown#profileDropdown
-              a(href=`/users/${user_id}`) Your Profile
-              a.logout-link(href="/logout") Logout
+            if user_id
+              button#profileBtn.profile-btn
+                i.fa-solid.fa-user
+              .profile-dropdown#profileDropdown
+                a(href=`/users/${user_id}`) Your Profile
+                a.logout-link(href="/logout") Logout
+            else
+              a.header-login-btn(href="#" onclick="showLoginModal(); return false;") Login
+
 
     block content
 
@@ -72,4 +76,72 @@ html
           textarea(name="comment" rows="4" required)
 
           button(type="submit") Submit Review
+
+    // Login Modal
+    #loginModal.modal
+      .modal-content.login-container(style="padding: 40px; text-align: center; max-width: 400px; position: relative; margin: 0;")
+        span.close-btn(style="color: #888; font-size: 28px; top: 16px; right: 20px;" onclick="document.getElementById('loginModal').classList.remove('show')") &times;
+
+        h2.login-title(style="margin-top: 0;") Login
+
+        form#loginForm.login-form(style="text-align: left;")
+          .form-group
+            label.form-label(for="loginEmail") Email
+            input.form-input(type="email", name="email", id="loginEmail", required)
+          
+          .form-group
+            label.form-label(for="loginPassword") Password
+            input.form-input(type="password", name="password", id="loginPassword", required)
+          
+          button.login-button(type="submit") Login
+
+        #login-error-popup.error-popup(style="display: none; position: static; transform: none; margin-top: 15px; background-color: #d32f2f; color: white; padding: 10px; border-radius: 8px; font-weight: 600;")
+          span#login-error-message
+
+    script.
+      function showLoginModal() {
+        document.getElementById('loginModal').classList.add('show');
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('login') === 'true') {
+          showLoginModal();
+          const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+          window.history.replaceState({path: cleanUrl}, '', cleanUrl);
+        }
+
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+          loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const popup = document.getElementById('login-error-popup');
+            const msgSpan = document.getElementById('login-error-message');
+
+            try {
+              const response = await fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+              });
+
+              const data = await response.json();
+
+              if (data.success) {
+                const redirectUrl = urlParams.get('continue') || '/';
+                window.location.href = redirectUrl;
+              } else {
+                msgSpan.innerText = data.message;
+                popup.style.display = 'block';
+                setTimeout(() => { popup.style.display = 'none'; }, 4000);
+              }
+            } catch (err) {
+              msgSpan.innerText = "Connection lost. Try again.";
+              popup.style.display = 'block';
+            }
+          });
+        }
+      });
 link(rel="stylesheet" href="/static/css/styles.css")
