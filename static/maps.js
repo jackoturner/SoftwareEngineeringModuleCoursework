@@ -1,8 +1,25 @@
-fetch("/api/pubs")
-  .then(res => res.json())
-  .then(data => {
+async function fetchJson(url, options) {
+  const res = await fetch(url, options);
+  if (res.redirected && res.url.includes("/login")) {
+    window.location.href = res.url;
+    return null;
+  }
+  const contentType = res.headers.get("content-type") || "";
+  if (!res.ok) {
+    throw new Error(`${res.status} ${res.statusText}`);
+  }
+  if (!contentType.includes("application/json")) {
+    throw new Error(`Expected JSON from ${url}, got ${contentType || "unknown"}`);
+  }
+  return res.json();
+}
+
+fetchJson("/api/pubs")
+  .then((data) => {
+    if (!data) return;
     initMap(data);
-  });
+  })
+  .catch((err) => console.error("Error loading map pubs:", err));
 
 function initMap(pubs) {
   const map = L.map("map").setView([51.505, -0.09], 13);
@@ -117,7 +134,7 @@ function initMap(pubs) {
     const popupHTML = `
     <div class="beer-popup">
         <div class="popup-header">
-        🍺 ${pub.name}
+        ${pub.name}
         </div>
         <div class="popup-body">
         ${pub.address}, ${pub.postcode}<br><br>
