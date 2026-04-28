@@ -1,3 +1,7 @@
+let map;
+let pubs = [];
+let routingControl;
+
 async function fetchJson(url, options) {
   const res = await fetch(url, options);
   if (res.redirected && res.url.includes("/login")) {
@@ -14,15 +18,15 @@ async function fetchJson(url, options) {
   return res.json();
 }
 
-fetchJson("/api/pubs")
-  .then((data) => {
-    if (!data) return;
-    initMap(data);
-  })
-  .catch((err) => console.error("Error loading map pubs:", err));
+fetch("/api/pubs")
+  .then(res => res.json())
+  .then(data => {
+    pubs = data;
+    initMap(pubs);
+  });
 
 function initMap(pubs) {
-  const map = L.map("map").setView([51.505, -0.09], 13);
+  map = L.map("map").setView([51.505, -0.09], 13);
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors"
@@ -156,4 +160,82 @@ function initMap(pubs) {
         maxWidth: 280
       });
   });
+}
+
+/* Button and logic for nearest pub */
+const directionsBtn = document.getElementById("directionsBtn");
+
+if (directionsBtn) {
+  directionsBtn.addEventListener("click", () => {
+    if (!navigator.geolocation) {
+      alert("Geolocation not supported");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const userLat = position.coords.latitude;
+        const userLng = position.coords.longitude;
+
+        findNearestPub(userLat, userLng);
+      },
+      () => {
+        alert("Unable to get your location");
+      }
+    );
+  });
+}
+
+function findNearestPub(userLat, userLng) {
+  let nearest = null;
+  let minDistance = Infinity;
+
+  pubs.forEach(pub => {
+    const distance = getDistance(
+      userLat,
+      userLng,
+      pub.latitude,
+      pub.longitude
+    );
+
+    if (distance < minDistance) {
+      minDistance = distance;
+      nearest = pub;
+    }
+  });
+
+  if (nearest) {
+    showRoute(userLat, userLng, nearest);
+  }
+}
+
+function getDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) *
+    Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  return R * c;
+}
+
+function showRoute(userLat, userLng, pub) {
+  if (routingControl) {
+    map.removeControl(routingControl);
+  }
+
+  routingControl = L.Routing.control({
+    waypoints: [
+      L.latLng(userLat, userLng),
+      L.latLng(pub.latitude, pub.longitude)
+    ],
+    routeWhileDragging: false
+  }).addTo(map);
 }
