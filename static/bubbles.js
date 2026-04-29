@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+    if (typeof particlesJS !== "function") return;
     const heroes = document.querySelectorAll('section.beer-hero, .beer-hero');
     heroes.forEach((hero, index) => {
         const id = 'particles-hero-' + index;

@@ -5,8 +5,8 @@ const path = require("path");
 const fs = require("fs");
 const { GoogleGenAI } = require("@google/genai");
 
-// Initialize Google Generative AI
-const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
+const googleApiKey = process.env.GOOGLE_API_KEY;
+const genAI = googleApiKey ? new GoogleGenAI({ apiKey: googleApiKey }) : null;
 
 // Multer to save files
 const storage = multer.diskStorage({
@@ -32,6 +32,12 @@ router.post("/", upload.single('image'), async (req, res) => {
     // Check if the user actually sent an image
     if (!req.file) {
         return res.status(400).send("No image uploaded.");
+    }
+
+    if (!genAI) {
+        return res
+            .status(500)
+            .send("GOOGLE_API_KEY is not set, so AI pour scoring is unavailable.");
     }
 
     try {

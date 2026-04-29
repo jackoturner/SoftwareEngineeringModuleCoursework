@@ -10,6 +10,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!modal) return;
 
+  async function fetchJson(url, options) {
+    const res = await fetch(url, options);
+    if (res.redirected && res.url.includes("/login")) {
+      window.location.href = res.url;
+      return null;
+    }
+    const contentType = res.headers.get("content-type") || "";
+    if (!res.ok) {
+      throw new Error(`${res.status} ${res.statusText}`);
+    }
+    if (!contentType.includes("application/json")) {
+      throw new Error(`Expected JSON from ${url}, got ${contentType || "unknown"}`);
+    }
+    return res.json();
+  }
+
   // Open modal
   if (openBtn) {
     openBtn.addEventListener("click", () => {
@@ -26,9 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Load pubs
   function loadPubs() {
-    fetch("/api/pubs")
-      .then(res => res.json())
+    fetchJson("/api/pubs")
       .then(data => {
+        if (!data) return;
         pubSelect.innerHTML = `<option value="">-- Select Pub --</option>`;
         data.forEach(pub => {
           pubSelect.innerHTML += `<option value="${pub.id}">${pub.name}</option>`;
@@ -45,9 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!pubId) return;
 
-    fetch(`/api/pubs/${pubId}/beers`)
-      .then(res => res.json())
+    fetchJson(`/api/pubs/${pubId}/beers`)
       .then(data => {
+        if (!data) return;
         data.forEach(beer => {
           beerSelect.innerHTML += `<option value="${beer.id}">${beer.name}</option>`;
         });
@@ -99,7 +115,15 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify(data)
       });
 
-      const result = await response.json();
+      if (response.redirected && response.url.includes("/login")) {
+        window.location.href = response.url;
+        return;
+      }
+
+      const contentType = response.headers.get("content-type") || "";
+      const result = contentType.includes("application/json")
+        ? await response.json()
+        : { success: false, error: "Unexpected server response" };
 
       if (result.success) {
         alert("Thank you! Your review has been submitted.");

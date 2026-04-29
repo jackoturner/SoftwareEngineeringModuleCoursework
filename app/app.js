@@ -57,7 +57,7 @@ app.use("/map", requireLogin, mapRoutes);
 app.use("/api", requireLogin, apiRoutes);
 
 // Database readiness check
-function testDBConnection(retries = 10) {
+function testDBConnection(retries = 30) {
   db.query("SELECT 1", (err) => {
     if (err) {
       console.log("Waiting for DB...");
