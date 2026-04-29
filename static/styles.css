@@ -147,6 +147,26 @@ nav a:hover {
   transition-duration: 300ms;
 }
 
+.header-login-btn {
+  color: white !important;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.4rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  display: inline-block;
+}
+
+.header-login-btn:hover {
+  background-color: white;
+  color: #B87333 !important;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+}
+
+
+
 /* Sections */
 section {
   background: white;
@@ -780,52 +800,49 @@ textarea {
   }
 }
 
-html.login-html,
+/* Login adjustments for layout integration */
 body.login-page {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background: #0a0a0a;
+  background-color: #f5f5f5;
 }
 
+
 /* Beer bubbles background */
-.beer-hero {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+.login-hero {
+  min-height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to bottom, #ffc979, #ff9800);
+  background: linear-gradient(135deg, #fbc02d 0%, #f57f17 100%);
+  position: relative;
   overflow: hidden;
-  z-index: 1;
 }
+
 
 /* Login card */
 .login-container {
   position: relative;
   z-index: 2;
-  background: rgba(221, 221, 221, 0.85);
-  backdrop-filter: blur(12px);
-  padding: 45px 55px;
-  border-radius: 18px;
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 420px;
-  border: 1px solid rgba(212, 175, 55, 0.25);
+  max-width: 400px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
+
+
 .login-title {
-  color: #16183a;
+  color: #2c2c2c;
   text-align: center;
-  margin-bottom: 35px;
-  font-size: 2.5rem;
-  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  margin-bottom: 30px;
+  font-size: 2.8rem;
+  font-weight: 900;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
 }
+
 
 .login-form { 
   width: 100%; 
@@ -846,14 +863,16 @@ body.login-page {
 }
 
 .form-input {
-  width: 50vh;
-  padding: 15px 5px 15px 5px;
-  border: none;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.95);
-  font-size: 1.05rem;
-  color: #1a0f00;
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  font-size: 1rem;
+  color: #333;
+  transition: all 0.2s ease;
 }
+
 
 .form-input:focus {
   outline: none;
@@ -863,22 +882,24 @@ body.login-page {
 
 .login-button {
   width: 100%;
-  padding: 16px;
-  background: #d4af37;
-  color: #16183a;
+  padding: 14px;
+  background: #B87333;
+  color: white;
   border: none;
-  border-radius: 10px;
-  font-size: 1.15rem;
-  font-weight: bold;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .login-button:hover {
-  background: #f0d06b;
-  transform: translateY(-3px);
+  background: #ff9800;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(184, 115, 51, 0.3);
 }
+
 
 .beer-hero::before {
   content: '';
