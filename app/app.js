@@ -41,7 +41,7 @@ const apiRoutes = require("./models/api");
 function requireLogin(req, res, next) {
   if (!req.session.user_id) {
     if (req.xhr || (req.headers.accept && req.headers.accept.indexOf('json') > -1)) {
-        return res.status(401).json({ error: "You must be logged in" });
+      return res.status(401).json({ error: "You must be logged in" });
     }
     return res.redirect(`/?login=true&continue=${encodeURIComponent(req.originalUrl)}`);
   }
@@ -64,10 +64,12 @@ function testDBConnection(retries = 30) {
       if (retries > 0) {
         setTimeout(() => testDBConnection(retries - 1), 2000);
       } else {
-        console.error("DB connection failed");
+        console.error(" ❌ DB connection failed");
+        process.exit(1);
       }
     } else {
-      console.log("DB ready");
+      console.log(" ✅ DB is ready");
+      console.log(" 🍺 TapThat is running!");
     }
   });
 }

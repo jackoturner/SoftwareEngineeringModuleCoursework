@@ -47,8 +47,13 @@ header {
 
 .hero {
   background-color: #afafaf;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/hero-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: white;
-  padding: 40px 20px;
+  padding: 60px 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
   text-align: center;
   margin: 0;
   border-radius: 0;
@@ -65,6 +70,7 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-shadow: none;
   animation: heroFadeIn 1s ease-out forwards;
 }
 
@@ -612,7 +618,7 @@ section.remove-styling:hover {
 }
 
 .beer-item {
-  background-color: #ffffff; 
+  background-color: #ffffff;
   border: 1px solid #f0f0f0;
   border-radius: 6px;
   padding: 12px 15px;
@@ -641,24 +647,24 @@ section.remove-styling:hover {
   height: 55px;
   border-radius: 50%;
   border: none;
-  font-size: 48px;
+  font-size: 24px;
   color: white;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   z-index: 1000;
 }
 
 .add-btn {
   left: 20px;
-  background-color: #28a745;
+  background-color: #B87333;
 }
 
 .dir-btn {
   right: 20px;
-  background-color: #dc3545;
+  background-color: #B87333;
 }
 
 .map-btn:hover {
@@ -670,7 +676,7 @@ section.remove-styling:hover {
   position: fixed;
   z-index: 9999;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
 }
 
@@ -686,7 +692,7 @@ section.remove-styling:hover {
   background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   font-family: 'Inter', sans-serif;
 }
 
@@ -794,6 +800,7 @@ textarea {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -824,17 +831,26 @@ body.login-page {
   z-index: 2;
   background: #ffffff;
   padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(184, 115, 51, 0.15);
   width: 100%;
   max-width: 400px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(184, 115, 51, 0.1);
 }
 
+.login-container .close-btn {
+  color: #888 !important;
+  z-index: 10;
+}
 
+.login-container .close-btn:hover {
+  color: #333 !important;
+}
 
-.login-title {
-  color: #2c2c2c;
+.modal-content h2.login-title {
+  color: #B87333;
+  background: transparent;
+  padding: 0;
   text-align: center;
   margin-bottom: 30px;
   font-size: 2.8rem;
@@ -843,22 +859,24 @@ body.login-page {
   font-style: italic;
 }
 
-
-.login-form { 
-  width: 100%; 
-  margin: 0 auto;              
+.login-form {
+  width: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.form-group { margin-bottom: 24px; }
+.form-group {
+  margin-bottom: 24px;
+  width: 100%;
+}
 
 .form-label {
   display: block;
-  color: #16183a;
+  color: #2c2c2c;
   margin-bottom: 8px;
-  font-weight: 500;
+  font-weight: 600;
   text-align: left;
 }
 
@@ -867,17 +885,18 @@ body.login-page {
   padding: 12px 16px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  background: white;
+  background: #fdfdfd;
   font-size: 1rem;
   color: #333;
   transition: all 0.2s ease;
+  box-sizing: border-box;
 }
-
 
 .form-input:focus {
   outline: none;
   background: #fff;
-  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.5);
+  border-color: #B87333;
+  box-shadow: 0 0 0 4px rgba(184, 115, 51, 0.2);
 }
 
 .login-button {
@@ -895,7 +914,7 @@ body.login-page {
 }
 
 .login-button:hover {
-  background: #ff9800;
+  background: #a0632b;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(184, 115, 51, 0.3);
 }
@@ -914,16 +933,16 @@ body.login-page {
 }
 
 .error-popup {
-  position: fixed; 
+  position: fixed;
   top: 40px;
   left: 50%;
-  transform: translateX(-50%); 
+  transform: translateX(-50%);
   background-color: #d32f2f;
   color: white;
   padding: 14px 28px;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  z-index: 9999; 
+  z-index: 9999;
   font-weight: 600;
   font-size: 1rem;
   letter-spacing: 0.5px;
@@ -932,13 +951,14 @@ body.login-page {
 }
 
 @keyframes slideDownFade {
-  from { 
-    opacity: 0; 
-    transform: translate(-50%, -30px); 
+  from {
+    opacity: 0;
+    transform: translate(-50%, -30px);
   }
-  to { 
-    opacity: 1; 
-    transform: translate(-50%, 0); 
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
   }
 }
 
@@ -960,7 +980,7 @@ body.login-page {
 }
 
 .profile-btn i {
- font-size: 16px;
+  font-size: 16px;
   color: #333;
 }
 
@@ -974,12 +994,12 @@ body.login-page {
   top: 52px;
   background: white;
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   display: none;
   flex-direction: column;
   min-width: 180px;
   overflow: hidden;
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .profile-dropdown a {
@@ -1020,11 +1040,13 @@ body.login-page {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 /* ========== SEARCH BAR (Google style, centered) ========== */
 .search-container {
   display: flex;
@@ -1051,7 +1073,7 @@ body.login-page {
 
 .search-input:focus {
   border-color: #B87333;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
 }
 
 .search-button {
@@ -1063,7 +1085,7 @@ body.login-page {
   border: none;
   font-size: 20px;
   cursor: pointer;
-  color: #777;
+  color: #B87333;
 }
 
 /* ========== USERS GRID (cards) ========== */
@@ -1078,7 +1100,7 @@ body.login-page {
   background: white;
   border-radius: 16px;
   padding: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s, box-shadow 0.2s;
   display: flex;
   flex-direction: column;
@@ -1088,7 +1110,7 @@ body.login-page {
 
 .user-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
 }
 
 .avatar-placeholder {
@@ -1115,7 +1137,8 @@ body.login-page {
   font-size: 0.9rem;
 }
 
-.user-joined, .user-rating {
+.user-joined,
+.user-rating {
   font-size: 0.85rem;
   color: #555;
   margin: 6px 0;
@@ -1147,7 +1170,7 @@ body.login-page {
   align-items: center;
   gap: 30px;
   flex-wrap: wrap;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .avatar-large {
@@ -1189,12 +1212,12 @@ body.login-page {
   background: white;
   border-radius: 16px;
   padding: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: 0.2s;
 }
 
 .review-card:hover {
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .review-header {
@@ -1206,7 +1229,8 @@ body.login-page {
   padding-bottom: 8px;
 }
 
-.pub-name, .beer-name {
+.pub-name,
+.beer-name {
   font-size: 1rem;
 }
 
@@ -1244,8 +1268,18 @@ body.login-page {
   text-align: right;
 }
 
-.no-results, .no-reviews {
+.no-results,
+.no-reviews {
   text-align: center;
   padding: 40px;
   color: #777;
+}
+
+.leaflet-routing-container.leaflet-bar.leaflet-control {
+  border-radius: 30px;
+  padding: 0 10px;
+}
+
+.leaflet-routing-container h2 {
+  font-size: 24px;
 }

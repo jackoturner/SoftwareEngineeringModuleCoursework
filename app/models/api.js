@@ -3,7 +3,8 @@ const router = express.Router();
 const db = require("../services/db");
 
 router.get("/pubs", (req, res) => {
-  const sql = `
+  const search = req.query.search;
+  let sql = `
     SELECT 
       pubs.id,
       pubs.name,
@@ -25,7 +26,14 @@ router.get("/pubs", (req, res) => {
       )
   `;
   
-  db.query(sql, (err, results) => {
+  const params = [];
+  if (search) {
+    sql += ` WHERE pubs.name LIKE ? OR pubs.address LIKE ?`;
+    const searchPattern = `%${search}%`;
+    params.push(searchPattern, searchPattern);
+  }
+
+  db.query(sql, params, (err, results) => {
     if (err) {
       return res.status(500).json({ error: err });
     }

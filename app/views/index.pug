@@ -2,22 +2,54 @@ extends layout
 
 block content
   
-  main
-    section.hero
-      if first_name
-        h1 Ready for your next pint, #{first_name}?
+  section.hero
+    if first_name
+      h1 Ready for your next pint, #{first_name}?
+      .search-container
+        form.search-form(method="GET" action="/map")
+          input.search-input(type="text" name="search" placeholder="Search for a pub near you..." value=search autocomplete="off")
+          button.search-button(type="submit") #[i.fa-solid.fa-magnifying-glass]
+    else
+      h1(style="margin-bottom: 30px;") Discover pubs, rate pints, and see what others recommend.
+      a(href=`/login`).btn Log in to get started
+
+  main.container(style="margin-top: 40px; margin-bottom: 60px;")
+    section.remove-styling
+      h2(style="text-align: left; margin-bottom: 30px; font-size: 2.5em;") Featured Pubs
+      if featuredPubs && featuredPubs.length > 0
+        .section-row
+          each pub in featuredPubs
+            section.w-third.remove-styling
+              div.beer-item(style="text-align: left; padding: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; height: 100%; box-sizing: border-box; overflow: hidden;")
+                - var lightness1 = 35 + (pub.id * 17) % 25
+                - var lightness2 = 20 + (pub.id * 13) % 20
+                - var bgStyle = `background: linear-gradient(135deg, hsl(29, 60%, ${lightness1}%), hsl(29, 70%, ${lightness2}%));`
+                div(style=`${bgStyle} width: 100%; height: 180px; display: flex; align-items: center; justify-content: center;`)
+                  i.fa-solid.fa-beer-mug-empty(style="font-size: 5em; color: rgba(255, 255, 255, 0.5);")
+                div(style="padding: 20px; display: flex; flex-direction: column; align-items: flex-start; flex-grow: 1; width: 100%; box-sizing: border-box;")
+                  strong(style="display: block; font-size: 1.3em; margin-bottom: 10px;") #{pub.name}
+                  p(style="margin: 5px 0 10px 0; color: #555;") #[i.fa-solid.fa-location-dot(style="margin-right: 6px;")] #{pub.address}
+                  - var avgRating = parseFloat(pub.average_rating) || 0
+                  p(style="margin: 5px 0 20px 0; color: #555; font-size: 1.1em;") #{avgRating.toFixed(1)} #[i.fa-solid.fa-star(style="color: #FFCC00;")]
+                  a.view-profile-btn(href=`/pubs/${pub.id}`, style="margin-top: auto;") View Pub
       else
-        h1 Ready for your next pint?
-      p Discover pubs, rate pints, and see what others recommend.
+        p(style="text-align: left;") No featured pubs available.
 
-    section
-      h2 Quick Actions
-      ul
-        li
-          a(href="/pubs") Find a pub near you
-        li
-          a(href="/users") Browse users and reviews
-
-    section
-      h2 About
-      p TapThat helps you discover pubs, review pints, and see what others recommend. Use the map to find nearby pubs and check ratings before you go.
+    section.remove-styling(style="margin-top: 60px;")
+      h2(style="text-align: left; margin-bottom: 30px; font-size: 2.5em;") Quick Actions
+      .section-row
+        section.w-third.remove-styling
+          div.beer-item(style="text-align: left; padding: 30px 20px;")
+            i.fa-solid.fa-map-location-dot(style="font-size: 2.5em; color: #B87333; margin-bottom: 15px;")
+            strong(style="display: block; font-size: 1.2em; margin-bottom: 15px;") Interactive Map
+            a.view-profile-btn(href="/map") Explore Map
+        section.w-third.remove-styling
+          div.beer-item(style="text-align: left; padding: 30px 20px;")
+            i.fa-solid.fa-beer-mug-empty(style="font-size: 2.5em; color: #B87333; margin-bottom: 15px;")
+            strong(style="display: block; font-size: 1.2em; margin-bottom: 15px;") Browse Pubs
+            a.view-profile-btn(href="/pubs") View Directory
+        section.w-third.remove-styling
+          div.beer-item(style="text-align: left; padding: 30px 20px;")
+            i.fa-solid.fa-users(style="font-size: 2.5em; color: #B87333; margin-bottom: 15px;")
+            strong(style="display: block; font-size: 1.2em; margin-bottom: 15px;") Community
+            a.view-profile-btn(href="/users") View Users

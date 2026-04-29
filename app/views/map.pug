@@ -1,15 +1,93 @@
 extends layout
 
 block content
-  main.container
+  style.
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+    main {
+      flex: 1;
+      margin: 0 !important;
+      padding: 0 !important;
+      max-width: 100% !important;
+    }
+    .map-wrapper {
+      height: 100% !important;
+      width: 100%;
+    }
+    .map-search-overlay {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: #333;
+    }
+    .clear-search-btn {
+      color: #dc3545;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    .map-search-form {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .map-search-form input {
+      border: none;
+      outline: none;
+      font-size: 16px;
+      background: transparent;
+      width: 200px;
+      padding: 5px 0;
+    }
+    .map-search-form button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+    }
+  main
     .map-wrapper
         #map
+        
+        form(action="/map" method="GET").map-search-form
+          input#mapSearchInput(type="text" name="search" placeholder="Search...")
+          button(type="submit") #[i.fa-solid.fa-magnifying-glass]
 
-        button#addReviewBtn.map-btn.add-btn ✚
-        button#directionsBtn.map-btn.dir-btn ➹
+        #searchOverlay.map-search-overlay(style="display: none;")
+          span#searchOverlayText
+          a(href="/map" class="clear-search-btn") ✕
+
+        button#addReviewBtn.map-btn.add-btn #[i.fa-solid.fa-plus]
+        button#directionsBtn.map-btn.dir-btn #[i.fa-solid.fa-location-arrow]
 
   link(rel="stylesheet", href="https://unpkg.com/leaflet/dist/leaflet.css")
   script(src="https://unpkg.com/leaflet/dist/leaflet.js")
   script(src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js")
   link(rel="stylesheet", href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css")
   script(src="/static/maps.js")
+
+block footer
+  // Footer omitted on this page
