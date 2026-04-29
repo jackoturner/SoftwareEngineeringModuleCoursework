@@ -1,0 +1,60 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: tapthat-db
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Wait for MySQL
+        run: |
+          for i in {1..10}; do
+            nc -z 127.0.0.1 3306 && echo "MySQL ready" && exit 0
+            echo "Waiting for MySQL..."
+            sleep 3
+          done
+          exit 1
+
+      - name: Run schema
+        run: mysql -h 127.0.0.1 -uroot -proot tapthat-db < schema.sql
+
+      - name: Run basic app check
+        run: node index.js &
+      
+      - name: Health check
+        run: |
+          sleep 5
+          curl -f http://localhost:3000 || exit 1
+
+      - name: Build Docker image
+        run: docker build -t tapthat-app .
