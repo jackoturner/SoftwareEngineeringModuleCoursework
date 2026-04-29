@@ -297,6 +297,15 @@ function showRoute(userLat, userLng, pub) {
       L.latLng(userLat, userLng),
       L.latLng(pub.latitude, pub.longitude)
     ],
-    routeWhileDragging: false
+    routeWhileDragging: false,
+    fitSelectedRoutes: false // Disable the default fit so we can do it manually with padding
   }).addTo(map);
+
+  routingControl.on('routesfound', function (e) {
+    const routes = e.routes;
+    if (routes && routes.length > 0) {
+      const bounds = L.latLngBounds(routes[0].coordinates);
+      map.fitBounds(bounds, { padding: [50, 50] });
+    }
+  });
 }

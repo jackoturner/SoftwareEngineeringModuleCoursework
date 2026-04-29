@@ -43,7 +43,7 @@ html
 
     block footer
       footer
-        p © 2026 TapThat
+        p © 2026 TapThat - Created by Luke Pring, Jack Turner, Alec Thompson, and Victor Tepeniuc - University of Roehampton London - #[a(href="https://github.com/jackoturner/SoftwareEngineeringModuleCoursework" target="_blank") View Project on GitHub]
     
     script(src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js")
     script(src="/static/bubbles.js")
@@ -102,6 +102,7 @@ html
     script.
       function showLoginModal() {
         document.getElementById('loginModal').classList.add('show');
+        setTimeout(() => window.dispatchEvent(new Event('resize')), 50);
       }
 
       document.addEventListener('DOMContentLoaded', () => {

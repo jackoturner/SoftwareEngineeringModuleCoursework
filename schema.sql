@@ -135,7 +135,8 @@ INSERT INTO pubs VALUES
 (47,'The Seven Stars','53-54 Carey Street','WC2A 2JB',51.51620000,-0.11320000,'Tiny historic legal quarter pub',NOW()),
 (48,'The Ship & Shovell','1-3 Craven Passage','WC2N 5PH',51.50790000,-0.12450000,'Unique split pub near Charing Cross',NOW()),
 (49,'The White Cross','1 Water Lane','TW9 1TH',51.46080000,-0.30720000,'Riverside Richmond pub',NOW()),
-(50,'The Trafalgar Tavern','Park Row','SE10 9NW',51.48230000,-0.00680000,'Grand Greenwich riverside pub',NOW());
+(50,'The Trafalgar Tavern','Park Row','SE10 9NW',51.48230000,-0.00680000,'Grand Greenwich riverside pub',NOW()),
+(51,'The George Inn','High Street, Robertsbridge','TN32 5AW',50.98595400,0.48202100,'Historic inn in Robertsbridge, East Sussex',NOW());
 
 -- BEERS DATA
 INSERT INTO beers VALUES
@@ -206,7 +207,8 @@ INSERT INTO pub_beers (pub_id, beer_id, is_available) VALUES
 (47,13,1),(47,3,1),(47,11,1),(47,5,1),(47,14,1),(47,8,1),(47,9,1),
 (48,12,1),(48,7,1),(48,9,1),(48,1,1),(48,2,1),(48,11,1),
 (49,15,1),(49,12,1),(49,3,1),(49,9,1),(49,1,1),(49,6,1),
-(50,10,1),(50,9,1),(50,3,1),(50,7,1),(50,13,1),(50,1,1),(50,5,1),(50,6,1),(50,12,1),(50,15,1);
+(50,10,1),(50,9,1),(50,3,1),(50,7,1),(50,13,1),(50,1,1),(50,5,1),(50,6,1),(50,12,1),(50,15,1),
+(51,1,1),(51,2,1),(51,5,1),(51,12,1),(51,13,1);
 
 -- REVIEWS DATA
 INSERT INTO reviews (user_id,pub_id,beer_id,rating,ai_pour_score,comment) VALUES
@@ -299,4 +301,5 @@ INSERT INTO reviews (user_id,pub_id,beer_id,rating,ai_pour_score,comment) VALUES
 (7,49,5,5,4.7,'Riverside Richmond'),
 (8,49,3,4,4.4,'White Cross views'),
 (9,50,7,5,4.9,'Trafalgar Tavern grand'),
-(10,50,1,4,4.3,'Greenwich riverside perfect');
+(10,50,1,4,4.3,'Greenwich riverside perfect'),
+(2,51,5,5,5.00,'Wonderful service from Ethan Pring');

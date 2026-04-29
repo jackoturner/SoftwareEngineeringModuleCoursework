@@ -1,15 +1,17 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     if (typeof particlesJS !== "function") return;
-    const heroes = document.querySelectorAll('section.beer-hero, .beer-hero');
+    const heroes = document.querySelectorAll('section.beer-hero, .beer-hero, #loginModal');
     heroes.forEach((hero, index) => {
         const id = 'particles-hero-' + index;
         const div = document.createElement('div');
         div.id = id;
         div.className = 'particles-bg';
-        
+
         // Setup hero for absolute positioning of the canvas
-        hero.style.position = 'relative';
-        
+        if (window.getComputedStyle(hero).position === 'static') {
+            hero.style.position = 'relative';
+        }
+
         // zIndex 1 for children so they sit on top of the canvas
         Array.from(hero.children).forEach(child => {
             child.style.position = 'relative';
