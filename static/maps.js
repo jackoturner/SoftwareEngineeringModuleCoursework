@@ -96,9 +96,9 @@ function initMap(pubs) {
 
   const beerIcon = L.icon({
     iconUrl: 'data:image/svg+xml;base64,' + btoa(beerSVG),
-    iconSize:     [26, 32],
-    iconAnchor:   [13, 32],
-    popupAnchor:  [0, -32]
+    iconSize: [26, 32],
+    iconAnchor: [13, 32],
+    popupAnchor: [0, -32]
   });
 
   // Beer-themed popup CSS
@@ -124,22 +124,24 @@ function initMap(pubs) {
         padding: 12px 16px;
         font-size: 18px;
         font-weight: bold;
-        border-bottom: 4px solid #f4c95d;
+        border-bottom: 4px solid #b87334;
         text-align: center;
+        font-family: 'Instrument Serif', serif;
     }
 
     /* Golden beer body */
     .beer-popup .popup-body {
-        background: #FFCC00;
-        color: #2c3e50;
+        background: #b87334;
+        color: #fff;
         padding: 14px 16px;
         line-height: 1.6;
+        font-family: 'Inter', sans-serif;
     }
 
     .beer-popup .popup-body a {
-        color: #2c3e50;
+        color: #fff;
         font-weight: bold;
-        text-decoration: underline;
+        text-decoration: none;
     }
 
     .beer-popup .popup-body a:hover {
@@ -147,17 +149,18 @@ function initMap(pubs) {
     }
 
     .beer-popup .leaflet-popup-tip {
-        background: #FFCC00;
+        background: #b87334;
     }
+
     `;
-    document.head.appendChild(style);
+  document.head.appendChild(style);
 
   const markers = [];
   pubs.forEach(pub => {
     let reviewHTML = `<em>No reviews yet</em>`;
 
     if (pub.comment) {
-    reviewHTML = `
+      reviewHTML = `
         <strong>Latest Review:</strong><br>
         Rating: ${pub.rating}/5<br>
         ${pub.ai_pour_score ? `AI Score: ${pub.ai_pour_score}<br>` : ""}
@@ -171,44 +174,48 @@ function initMap(pubs) {
         ${pub.name}
         </div>
         <div class="popup-body">
-        ${pub.address}, ${pub.postcode}<br><br>
+        <p style="margin: 0 0 15px 0;">${pub.address}, ${pub.postcode}</p>
+        <div style="margin-bottom: 20px;">
+          ${reviewHTML}
+        </div>
 
-        ${reviewHTML}<br><br>
-
-        <a href="/pubs/${pub.id}">View Pub Details →</a>
+        <div style="display: flex; flex-direction: row; gap: 10px; justify-content: space-between;">
+          <a class="btn" style="flex: 1; text-align: center; padding: 12px 0; font-size: 1em; font-weight: bold; margin: 0 15px 0 5px;" href="/pubs/${pub.id}">Details</a>
+          <a class="btn" style="flex: 1; text-align: center; padding: 12px 0; font-size: 1em; font-weight: bold; margin: 0 5px 0 5px;" href="/map?pub_id=${pub.id}">Directions</a>
+        </div>
         </div>
     </div>
     `;
 
-    const marker = L.marker([pub.latitude, pub.longitude], { 
-      icon: beerIcon 
+    const marker = L.marker([pub.latitude, pub.longitude], {
+      icon: beerIcon
     })
       .addTo(map)
       .bindPopup(popupHTML, {
-        className: 'beer-popup',    
+        className: 'beer-popup',
         closeButton: true,
         maxWidth: 280
       });
-      
+
     markers.push(marker);
   });
 
   const urlParams = new URLSearchParams(window.location.search);
   const searchQuery = urlParams.get('search');
-  
+
   if (searchQuery) {
     const searchInput = document.getElementById('mapSearchInput');
     if (searchInput) {
       searchInput.value = searchQuery;
     }
-    
+
     const overlay = document.getElementById('searchOverlay');
     const overlayText = document.getElementById('searchOverlayText');
     if (overlay && overlayText) {
       overlayText.textContent = `Showing ${pubs.length} result${pubs.length === 1 ? '' : 's'} for "${searchQuery}"`;
       overlay.style.display = 'flex';
     }
-    
+
     if (markers.length > 0) {
       const group = L.featureGroup(markers);
       map.fitBounds(group.getBounds(), { padding: [50, 50], maxZoom: 16 });
