@@ -4,9 +4,30 @@ const db = require("../services/db");
 const bcrypt = require("bcrypt");
 
 router.get("/", (req, res) => {
-  res.render("index", {
-    user_email: req.session.user_email,
-    first_name: req.session.first_name
+  const sql = `
+    SELECT pubs.id, pubs.name, pubs.address, COALESCE(AVG(reviews.rating), 0) AS average_rating
+    FROM pubs
+    LEFT JOIN reviews ON pubs.id = reviews.pub_id
+    GROUP BY pubs.id
+    ORDER BY average_rating DESC, pubs.name ASC
+    LIMIT 3
+  `;
+
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.render("index", {
+        user_email: req.session.user_email,
+        first_name: req.session.first_name,
+        featuredPubs: []
+      });
+    }
+
+    res.render("index", {
+      user_email: req.session.user_email,
+      first_name: req.session.first_name,
+      featuredPubs: results
+    });
   });
 });
 

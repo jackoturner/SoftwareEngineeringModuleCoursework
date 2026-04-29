@@ -1,62 +1,22 @@
 extends layout
 
 block content
-  .container
-    .search-container
+  main.container
+    .search-container(style="margin-bottom: 40px;")
       form.search-form(method="GET" action="/users")
-        input.search-input(type="text" name="search" placeholder="Search by name or email" value=search autocomplete="off")
-        button.search-button(type="submit") 🔍
+        input.search-input(type="text" name="search" placeholder="Search by name..." value=search autocomplete="off")
+        button.search-button(type="submit") #[i.fa-solid.fa-magnifying-glass]
 
-    .users-grid
+    .section-row
       each user in users
-        .user-card
-          .user-avatar
-            .avatar-placeholder #{user.first_name.charAt(0)}#{user.last_name.charAt(0)}
-          .user-info
-            h3.user-name #{user.first_name} #{user.last_name}
-            p.user-email #{user.email}
-            - var joinDate = user.created_at ? new Date(user.created_at).toDateString() : 'Unknown'
-            p.user-joined Joined: #{joinDate}
+        section.w-third.remove-styling
+          div.beer-item(style="text-align: center; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; box-sizing: border-box;")
+            .user-avatar(style="margin-bottom: 15px;")
+              .avatar-placeholder(style="margin: 0 auto;") #{user.first_name.charAt(0)}#{user.last_name.charAt(0)}
+            strong(style="display: block; font-size: 1.2em; margin-bottom: 10px;") #{user.first_name} #{user.last_name}
             - var avgRating = parseFloat(user.average_rating) || 0
-            p.user-rating Avg rating: #{avgRating.toFixed(1)} ★
-          .user-action
-            a.view-profile-btn(href=`/users/${user.id}`) View Profile
+            p(style="margin: 5px 0 20px 0; color: #555; font-size: 0.9em;") Avg rating: #{avgRating.toFixed(1)} #[i.fa-solid.fa-star(style="color: #FFCC00;")]
+            a.view-profile-btn(href=`/users/${user.id}`, style="margin-top: auto;") View Profile
 
       if users.length === 0
-        p.no-results No users found.
-
-  script.
-    const searchInput = document.getElementById('userSearch');
-    const clearBtn = document.getElementById('clearSearch');
-    const cards = document.querySelectorAll('.user-card');
-
-    function filterUsers() {
-      const term = searchInput.value.toLowerCase().trim();
-      cards.forEach(card => {
-        const name = card.getAttribute('data-name');
-        const email = card.getAttribute('data-email');
-        const id = card.getAttribute('data-id');
-        const rating = parseFloat(card.getAttribute('data-rating')) || 0;
-
-        let matchesText = name.includes(term) || email.includes(term) || id.includes(term);
-        let matchesRating = false;
-        if (!isNaN(parseFloat(term)) && isFinite(term)) {
-          const ratingValue = parseFloat(term);
-          matchesRating = rating >= ratingValue;
-        }
-
-        if (matchesText || matchesRating) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-
-    searchInput.addEventListener('input', filterUsers);
-
-    clearBtn.addEventListener('click', function() {
-      searchInput.value = '';
-      filterUsers();
-      searchInput.focus();
-    });
+        p.no-results(style="width: 100%; text-align: center;") No users found.

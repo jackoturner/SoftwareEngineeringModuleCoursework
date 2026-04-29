@@ -41,6 +41,7 @@ router.get("/:id", (req, res) => {
     JOIN pubs ON reviews.pub_id = pubs.id
     JOIN beers ON reviews.beer_id = beers.id
     WHERE reviews.user_id = ?
+    ORDER BY reviews.created_at DESC
   `;
 
   db.query(userQuery, [userId], (err, userResults) => {

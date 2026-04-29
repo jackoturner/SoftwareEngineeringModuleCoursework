@@ -1,38 +1,52 @@
 extends layout
 
 block content
-  .container
-    .profile-card
-      .profile-avatar
-        .avatar-large #{user.first_name.charAt(0)}#{user.last_name.charAt(0)}
-      .profile-details
-        h1 #{user.first_name} #{user.last_name}
-        p.email #{user.email}
-        - var joinDate = user.created_at ? new Date(user.created_at).toDateString() : 'Unknown'
-        p.joined Joined: #{joinDate}
-        p.stats Total reviews: #{reviews.length}
+  section.hero.pub-hero
+    .container(style="display: flex; align-items: center; justify-content: flex-start; gap: 20px;")
+      .avatar-large(style="box-shadow: 0 4px 10px rgba(0,0,0,0.3);") #{user.first_name.charAt(0)}#{user.last_name.charAt(0)}
+      div(style="text-align: left;")
+        h1(style="margin: 0; text-shadow: none;") #{user.first_name} #{user.last_name}
+        p(style="margin: 10px 0 0 0;")
+          - var joinDate = user.created_at ? new Date(user.created_at).toDateString() : 'Unknown'
+          if user.id == user_id
+            | #[i.fa-solid.fa-envelope(style="margin-right: 8px;")] #{user.email}
 
-    h2.reviews-title Reviews by #{user.first_name}
-    .reviews-grid
-      each review in reviews
-        .review-card
-          .review-header
-            span.pub-name 📍 #{review.pub_name}
-            span.beer-name 🍺 #{review.beer_name}
-          .review-rating
-            - var rating = parseInt(review.rating) || 0
-            - for (var i = 1; i <= 5; i++)
-              if i <= rating
-                span.star-filled ★
-              else
-                span.star-empty ☆
-            span.rating-value (#{rating}/5)
-          if review.ai_pour_score
-            - var aiScore = parseFloat(review.ai_pour_score) || 0
-            .ai-score AI Pour Score: #{aiScore.toFixed(1)}/5
-          .review-comment "#{review.comment}"
-          - var reviewDate = review.created_at ? new Date(review.created_at).toLocaleDateString() : 'Unknown'
-          .review-date #{reviewDate}
+  main.container
+    .section-row
+      section.w-two-thirds.remove-styling
+        h2(style="margin-top: 0;") Reviews by #{user.first_name}
+        .section-row
+          each review in reviews
+            section.w-third
+              .review-header(style="margin-bottom: 8px;")
+                p(style="margin: 0; font-weight: bold;") #[i.fa-solid.fa-location-dot(style="margin-right: 6px;")] #{review.pub_name}
+              .review-rating(style="margin-bottom: 8px;")
+                - var rating = parseInt(review.rating) || 0
+                - for (var i = 1; i <= 5; i++)
+                  if i <= rating
+                    span.star-filled(style="color: #FFCC00;") #[i.fa-solid.fa-star]
+                  else
+                    span.star-empty(style="color: #ccc;") #[i.fa-regular.fa-star]
+                span.rating-value(style="margin-left: 5px; font-size: 0.9em;") (#{rating}/5)
+              p(style="margin: 0 0 8px 0; color: #555;") #[i.fa-solid.fa-beer-mug-empty(style="margin-right: 4px;")] #{review.beer_name}
+              if review.ai_pour_score
+                - var aiScore = parseFloat(review.ai_pour_score) || 0
+                p(style="margin: 0 0 8px 0; font-size: 0.9em; color: #777;") AI Pour Score: #{aiScore.toFixed(1)}/5
+              p(style="margin: 0 0 10px 0; font-style: italic;") "#{review.comment}"
+              - var reviewDate = review.created_at ? new Date(review.created_at).toLocaleDateString() : 'Unknown'
+              p(style="margin: 0; font-size: 0.8em; color: #999; text-align: right;") #{reviewDate}
 
-      if reviews.length === 0
-        p.no-reviews No reviews yet.
+          if reviews.length === 0
+            p.no-reviews(style="width: 100%;") No reviews yet.
+
+      section.w-third.remove-styling(style="padding-left: 30px;")
+        h2(style="margin-top: 0;") User Stats
+        div.beer-item(style="margin-bottom: 15px; text-align: center;")
+          strong Total Reviews
+          p(style="margin: 5px 0 0 0; font-size: 1.5em; color: #B87333;") #{reviews.length}
+        div.beer-item(style="margin-bottom: 15px; text-align: center;")
+          strong Average rating
+          p(style="margin: 5px 0 0 0; font-size: 1.5em; color: #B87333;") #{reviews.length > 0 ? (reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length).toFixed(1) : 0}
+        div.beer-item(style="margin-bottom: 15px; text-align: center;")
+          strong Date joined
+          p(style="margin: 5px 0 0 0; font-size: 1.5em; color: #B87333;") #{joinDate}

@@ -74,7 +74,6 @@ CREATE TABLE reviews (
 
 -- USERS DATA
 INSERT INTO users VALUES
-(1,'Sujal','Shah','sujal@example.com','$2b$10$8qUOIqqAO8hHNj2aUvqEHO7pCSg23W6JYQ1V6ve/7zitt3pM7O/86','2005-04-12',NULL,NULL,NOW()),
 (2,'Luke','Pring','luke@example.com','$2b$10$8qUOIqqAO8hHNj2aUvqEHO7pCSg23W6JYQ1V6ve/7zitt3pM7O/86','2003-09-21',NULL,NULL,NOW()),
 (3,'Jack','Turner','jack@example.com','$2b$10$8qUOIqqAO8hHNj2aUvqEHO7pCSg23W6JYQ1V6ve/7zitt3pM7O/86','2001-06-10',NULL,NULL,NOW()),
 (4,'Victor','Tepeniuc','victor@example.com','$2b$10$8qUOIqqAO8hHNj2aUvqEHO7pCSg23W6JYQ1V6ve/7zitt3pM7O/86','1999-06-11',NULL,NULL,NOW()),
@@ -211,7 +210,6 @@ INSERT INTO pub_beers (pub_id, beer_id, is_available) VALUES
 
 -- REVIEWS DATA
 INSERT INTO reviews (user_id,pub_id,beer_id,rating,ai_pour_score,comment) VALUES
-(1,1,1,5,4.8,'Perfect pint'),
 (2,1,2,4,4.2,'Nice lager'),
 (3,2,3,5,4.9,'Top IPA'),
 (4,2,6,4,4.1,'Smooth'),
@@ -221,7 +219,6 @@ INSERT INTO reviews (user_id,pub_id,beer_id,rating,ai_pour_score,comment) VALUES
 (8,4,6,4,4.0,'Decent'),
 (9,5,1,5,4.7,'Excellent'),
 (10,5,5,4,4.3,'Good stout'),
-(1,6,7,5,4.9,'Historic atmosphere, perfect ale'),
 (2,6,5,4,4.5,'Great Guinness in a hidden gem'),
 (3,7,5,5,4.8,'Best Guinness in Soho'),
 (4,7,10,4,4.2,'Excellent session IPA'),
@@ -231,7 +228,6 @@ INSERT INTO reviews (user_id,pub_id,beer_id,rating,ai_pour_score,comment) VALUES
 (8,9,7,4,4.4,'Lovely old inn'),
 (9,10,2,4,4.1,'Riverside views with cold lager'),
 (10,10,6,5,4.8,'Perfect by the Thames'),
-(1,11,3,5,4.9,'Classic Covent Garden IPA'),
 (2,11,13,4,4.3,'Landlord on great form'),
 (3,12,1,5,4.7,'Floral charm and excellent ale'),
 (4,12,7,4,4.5,'Iconic pub'),
@@ -241,7 +237,6 @@ INSERT INTO reviews (user_id,pub_id,beer_id,rating,ai_pour_score,comment) VALUES
 (8,14,5,5,4.9,'Victorian masterpiece'),
 (9,15,3,5,4.8,'Bohemian vibes'),
 (10,15,10,4,4.3,'Half pints only but perfect'),
-(1,16,5,5,4.7,'Secluded and cosy'),
 (2,16,7,4,4.4,'Great military history feel'),
 (3,17,1,5,4.9,'Dickens would approve'),
 (4,17,12,4,4.2,'Historic and hearty'),
@@ -251,7 +246,6 @@ INSERT INTO reviews (user_id,pub_id,beer_id,rating,ai_pour_score,comment) VALUES
 (8,19,14,5,4.7,'Warm and inviting'),
 (9,20,3,5,4.8,'Elegant Mayfair pour'),
 (10,20,10,4,4.1,'Refined experience'),
-(1,21,7,5,4.9,'Best pies and ales'),
 (2,21,5,4,4.4,'Unpretentious gem'),
 (3,22,1,4,4.2,'Historic City tavern'),
 (4,22,12,5,4.8,'Wine and ale mix perfect'),
@@ -261,7 +255,6 @@ INSERT INTO reviews (user_id,pub_id,beer_id,rating,ai_pour_score,comment) VALUES
 (8,24,9,4,4.5,'South London favourite'),
 (9,25,10,4,4.2,'Jazz and great beer'),
 (10,25,14,5,4.8,'Atmospheric East End'),
-(1,26,3,5,4.7,'Soho classic'),
 (2,26,7,4,4.4,'Pavement tables great'),
 (3,27,5,5,4.9,'Fun and offbeat'),
 (4,27,1,4,4.3,'Queer-friendly boozer'),
@@ -271,7 +264,6 @@ INSERT INTO reviews (user_id,pub_id,beer_id,rating,ai_pour_score,comment) VALUES
 (8,29,9,4,4.5,'Bloomsbury hidden spot'),
 (9,30,14,4,4.2,'Real East End feel'),
 (10,30,10,5,4.9,'Piano and pints'),
-(1,31,5,5,4.8,'Tiny and brilliant'),
 (2,31,3,4,4.4,'Fitzrovia favourite'),
 (3,32,7,5,4.9,'Pub of the year vibes'),
 (4,32,1,4,4.3,'Newington Green joy'),
@@ -281,7 +273,6 @@ INSERT INTO reviews (user_id,pub_id,beer_id,rating,ai_pour_score,comment) VALUES
 (8,34,14,4,4.5,'Bohemian charm'),
 (9,35,10,4,4.1,'Central but calm'),
 (10,35,5,5,4.9,'New Cavendish delight'),
-(1,36,3,5,4.7,'Brixton community hub'),
 (2,36,7,4,4.4,'Lyham Road local'),
 (3,37,1,4,4.3,'Nunhead classic'),
 (4,37,12,5,4.8,'Community spirit'),
@@ -291,7 +282,6 @@ INSERT INTO reviews (user_id,pub_id,beer_id,rating,ai_pour_score,comment) VALUES
 (8,39,10,5,4.7,'Flask Walk perfect'),
 (9,40,5,5,4.8,'Holly Bush cosy'),
 (10,40,3,4,4.4,'Hampstead legend'),
-(1,41,7,5,4.9,'Lamb''s Conduit classic'),
 (2,41,1,4,4.3,'Bloomsbury beauty'),
 (3,42,12,4,4.2,'Museum Tavern great'),
 (4,42,13,5,4.8,'Near British Museum'),
@@ -301,7 +291,6 @@ INSERT INTO reviews (user_id,pub_id,beer_id,rating,ai_pour_score,comment) VALUES
 (8,44,5,5,4.9,'Kentish Town vibe'),
 (9,45,3,5,4.8,'Assembly House landmark'),
 (10,45,7,4,4.4,'Victorian splendour'),
-(1,46,1,4,4.3,'Fleet Street Irish'),
 (2,46,12,5,4.7,'Tipperary classic'),
 (3,47,13,5,4.9,'Seven Stars tiny treasure'),
 (4,47,9,4,4.5,'Carey Street gem'),

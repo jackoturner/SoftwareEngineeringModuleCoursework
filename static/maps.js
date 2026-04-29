@@ -18,15 +18,44 @@ async function fetchJson(url, options) {
   return res.json();
 }
 
-fetch("/api/pubs")
+const urlParams = new URLSearchParams(window.location.search);
+const searchQuery = urlParams.get('search');
+let apiUrl = "/api/pubs";
+if (searchQuery) {
+  apiUrl += `?search=${encodeURIComponent(searchQuery)}`;
+}
+
+fetch(apiUrl)
   .then(res => res.json())
   .then(data => {
     pubs = data;
     initMap(pubs);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetPubId = urlParams.get('pub_id');
+    if (targetPubId) {
+      const targetPub = pubs.find(p => p.id == targetPubId);
+      if (targetPub) {
+        if (!navigator.geolocation) {
+          alert("Geolocation not supported");
+          return;
+        }
+        navigator.geolocation.getCurrentPosition(
+          position => {
+            const userLat = position.coords.latitude;
+            const userLng = position.coords.longitude;
+            showRoute(userLat, userLng, targetPub);
+          },
+          () => {
+            alert("Unable to get your location");
+          }
+        );
+      }
+    }
   });
 
 function initMap(pubs) {
-  map = L.map("map").setView([51.505, -0.09], 13);
+  map = L.map("map", { zoomControl: false }).setView([51.505, -0.09], 13);
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors"
@@ -123,6 +152,7 @@ function initMap(pubs) {
     `;
     document.head.appendChild(style);
 
+  const markers = [];
   pubs.forEach(pub => {
     let reviewHTML = `<em>No reviews yet</em>`;
 
@@ -150,7 +180,7 @@ function initMap(pubs) {
     </div>
     `;
 
-    L.marker([pub.latitude, pub.longitude], { 
+    const marker = L.marker([pub.latitude, pub.longitude], { 
       icon: beerIcon 
     })
       .addTo(map)
@@ -159,7 +189,31 @@ function initMap(pubs) {
         closeButton: true,
         maxWidth: 280
       });
+      
+    markers.push(marker);
   });
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchQuery = urlParams.get('search');
+  
+  if (searchQuery) {
+    const searchInput = document.getElementById('mapSearchInput');
+    if (searchInput) {
+      searchInput.value = searchQuery;
+    }
+    
+    const overlay = document.getElementById('searchOverlay');
+    const overlayText = document.getElementById('searchOverlayText');
+    if (overlay && overlayText) {
+      overlayText.textContent = `Showing ${pubs.length} result${pubs.length === 1 ? '' : 's'} for "${searchQuery}"`;
+      overlay.style.display = 'flex';
+    }
+    
+    if (markers.length > 0) {
+      const group = L.featureGroup(markers);
+      map.fitBounds(group.getBounds(), { padding: [50, 50], maxZoom: 16 });
+    }
+  }
 }
 
 /* Button and logic for nearest pub */

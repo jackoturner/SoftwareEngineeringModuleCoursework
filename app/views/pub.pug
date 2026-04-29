@@ -6,7 +6,7 @@ block content
     p(style="margin-bottom: 30px;")
       img(src="/static/images/pin.png", alt="Location", width="24", height="24", style="vertical-align: middle; margin-right: 10px;") 
       | #{pub.address}
-    a(href="/map").btn Get Directions
+    a(href=`/map?pub_id=${pub.id}`).btn Get Directions
   main.container
     
     .section-row
